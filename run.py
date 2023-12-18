@@ -8,7 +8,7 @@ def text_file_match_output(home_abbr, away_abbr, data_home1, data_away1, def_cou
     current_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
 
     # Construct the file name with the current date and time
-    file_name = f"match_reports/match_output_{current_datetime}.txt"
+    file_name = f"match_reports/match_output_{home_abbr}_v_{away_abbr}_{current_datetime}.txt"
     
     with open(file_name, "w") as file:
         file.write(f"Home team abbr: {home_abbr}\n")
