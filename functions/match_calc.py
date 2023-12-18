@@ -14,14 +14,26 @@ def calc_chances(data):
     home_chances = int((home_mid / (home_mid + away_mid)) * 30) + home_random
     away_chances = int((away_mid / (home_mid + away_mid)) * 30) + away_random
 
+    print()
+    print("Team chances calculated")
     print(f"Home chances: ", home_chances, " random: ", home_random)
     print(f"Away chances: ", away_chances, " random: ", away_random)
 
     return home_chances, away_chances
 
-def calc_goals(home_chances, away_chances):
-    home_goals = int(home_chances * random.randint(0, 7) / 20)
-    away_goals = int(away_chances * random.randint(0, 7) / 20)
+def calc_on_target(home_chances, away_chances, att_count, def_count):
+    
+    home_random = random.randint(-1, 3)
+    away_random = random.randint(-2, 2)
+    
+    home_on_target = int(home_random + ((home_chances - 3) * (att_count / def_count))) 
+    away_on_target = int(away_random + ((away_chances - 2) * 0.5))
 
-    print(f"Home goals: ", home_goals, " Away goals: ", away_goals)
-  
+    print("Home on target: ", home_on_target, " away on target: ", away_on_target)
+
+def calc_possesion(home_chances, away_chances):
+    
+    home_possesion = 0
+    away_possesion = 0
+
+    
