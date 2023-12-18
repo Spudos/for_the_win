@@ -1,0 +1,34 @@
+Home team abbr: WOL
+Edd perf 57
+Bully perf 39
+Cat perf 34
+Monkey perf 56
+Speedy perf 33
+Spudos perf 56
+Woolley perf 45
+Geoff perf 42
+Croxford perf 65
+Teddy perf 38
+Pierce perf 58
+ 
+Away team abbr: ALV
+(2, 'Alexander-Arnold', 'England', 24, 'ALV', 'DEF', 10, 9, 8, 8, 8, 6, 6, 8, 5, 100, 33)
+(3, 'Endo', 'Spain', 31, 'ALV', 'MID', 6, 7, 8, 6, 6, 8, 6, 6, 8, 100, 48)
+(4, 'Nunez', 'Egypt', 30, 'ALV', 'ATT', 5, 6, 5, 10, 6, 6, 8, 6, 4, 100, 27)
+(6, 'Allison', 'Brazil', 30, 'ALV', 'GK', 8, 7, 4, 5, 10, 8, 6, 9, 5, 100, 58)
+(7, 'Van dijk', 'England', 24, 'ALV', 'DEF', 8, 9, 9, 8, 5, 10, 4, 7, 6, 100, 53)
+(8, 'Thiago', 'Spain', 31, 'ALV', 'MID', 10, 10, 6, 6, 6, 6, 8, 5, 9, 100, 70)
+(9, 'Salah', 'Egypt', 30, 'ALV', 'ATT', 8, 9, 5, 10, 10, 6, 9, 6, 5, 100, 73)
+(14, 'Robertson', 'England', 24, 'ALV', 'DEF', 6, 7, 8, 8, 5, 9, 5, 7, 8, 100, 54)
+(15, 'Konate', 'England', 24, 'ALV', 'DEF', 6, 7, 8, 8, 5, 8, 6, 8, 8, 100, 48)
+(16, 'Macalister', 'Spain', 31, 'ALV', 'MID', 9, 8, 5, 6, 7, 6, 9, 7, 6, 100, 47)
+(17, 'Diaz', 'Egypt', 30, 'ALV', 'ATT', 6, 7, 5, 10, 8, 6, 8, 6, 7, 100, 71)
+ 
+Defense - home: 192 away: 246
+Midfield - home: 171 away: 165
+Attack - home: 160 away: 171
+ 
+Possession - home: 47 away: 53
+Chances - home: 12 away: 13
+On target - home: 7 - away: 11
+Goals - home: 3 - away: 7
