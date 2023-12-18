@@ -18,12 +18,12 @@ def main():
     home_chances, away_chances = match_calc.calc_chances(mid_counth, mid_counta)
 
     # claculate how many chances are on target
-    home_on_target, away_on_target = match_calc.calc_on_target(home_chances, away_chances, att_counth, def_counth)
+    home_on_target, away_on_target = match_calc.calc_on_target(home_chances, away_chances, att_counth, def_counth, att_counta, def_counta)
 
     # calculate the possesion stats
     match_calc.calc_possesion(home_chances, away_chances)
 
     # calculate how many goals are scored
-    match_calc.calc_goals(home_on_target, away_on_target, def_counth, att_counth)
+    match_calc.calc_goals(home_on_target, away_on_target, def_counth, att_counth, att_counta, def_counta)
 
 main()
