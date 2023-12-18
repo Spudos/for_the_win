@@ -1,5 +1,5 @@
-from functions.import_team import player_load
-from functions.player_adjustments import calc_on_player_fitness
+
+from functions import import_team, player_adjustments
 
 def player_perf_print(data):
     # Print the results
@@ -7,8 +7,8 @@ def player_perf_print(data):
         print(f"Player: {record[0]}, Perf: {record[1]}")
 
 def main():
-    data = player_load()
-    data1 = calc_on_player_fitness(data)
+    data = import_team.player_load()
+    data1 = player_adjustments.calc_on_player_fitness(data)
     player_perf_print(data1)
 
 main()

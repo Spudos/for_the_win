@@ -1,5 +1,6 @@
 def calc_on_player_fitness(data):
     # Perform calculation on each stat and save the results
+    print("Calculating fitness adjustment for player")
     results = []
     for record in data:
         name = record[1]
@@ -17,7 +18,7 @@ def calc_on_player_fitness(data):
         fit = int(record[15])
 
         # Perform calculation on each stat
-        perf = int(((pa + co + tk + ru + sh + he + fl + st + cr) * fit / 100)/2)
+        perf = int((pa + co + tk + ru + sh + he + fl + st + cr) * fit / 100)
         
         # Save the calculated result
         results.append((name, perf))
