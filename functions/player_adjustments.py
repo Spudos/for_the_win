@@ -2,6 +2,8 @@ def calc_on_player_fitness(data):
     # Perform calculation on each stat and save the results
     print()
     print("Calculating fitness adjustment for players.....")
+    print()
+
     results = []
     for record in data:
         name = record[1]
@@ -27,7 +29,8 @@ def calc_on_player_fitness(data):
         results.append(record_with_perf)
 
         print(record_with_perf)
-
+        print()
+        
     return results  # Adjust the indentation of the return statement
 
 
