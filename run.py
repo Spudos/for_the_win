@@ -1,8 +1,44 @@
 from functions import import_team, player_adjustments, team_calc, match_calc
+from datetime import datetime
+import os
+
+def text_file_match_output(home_abbr, away_abbr, data_home1, data_away1, def_counth, mid_counth, att_counth, def_counta, mid_counta, att_counta, home_chances, away_chances, home_on_target, away_on_target, home_possession, away_possession, home_goals, away_goals):
+    
+    # Get the current date and time
+    current_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    # Construct the file name with the current date and time
+    file_name = f"match_reports/match_output_{current_datetime}.txt"
+    
+    with open(file_name, "w") as file:
+        file.write(f"Home team abbr: {home_abbr}\n")
+        file.write(f"Home team: {data_home1}\n")
+        file.write(f" \n")
+        file.write(f"Home team defense count: {def_counth}\n")
+        file.write(f"Home team midfield count: {mid_counth}\n")
+        file.write(f"Home team attack count: {att_counth}\n")        
+        file.write(f" \n")
+        file.write(f"Away team abbr: {away_abbr}\n")
+        file.write(f"Away team: {data_away1}\n")
+        file.write(f" \n")
+        file.write(f"Away team defense count: {def_counta}\n")
+        file.write(f"Away team midfield count: {mid_counta}\n")
+        file.write(f"Away team attack count: {att_counta}\n")
+        file.write(f" \n")
+        file.write(f"Home team possession: {home_possession}\n")        
+        file.write(f"Home team chances: {home_chances}\n")
+        file.write(f"Home team chances on target: {home_on_target}\n")  
+        file.write(f"Home team goals: {home_goals}\n")  
+        file.write(f" \n")
+        file.write(f"Away team possession: {away_possession}\n")        
+        file.write(f"Away team chances: {away_chances}\n")
+        file.write(f"Away team chances on target: {away_on_target}\n")
+        file.write(f"Away team goals: {away_goals}\n") 
+        file.write(f" \n")
 
 def main():
     # load the teams based on player selections
-    home, away = import_team.player_load()
+    home, away, home_abbr, away_abbr = import_team.player_load()
     
     # make player adjustments and calculate team values for the home team
     data_home = player_adjustments.calc_on_player_fitness(home)
@@ -21,9 +57,13 @@ def main():
     home_on_target, away_on_target = match_calc.calc_on_target(home_chances, away_chances, att_counth, def_counth, att_counta, def_counta)
 
     # calculate the possesion stats
-    match_calc.calc_possesion(home_chances, away_chances)
+    home_possession, away_possession = match_calc.calc_possession(home_chances, away_chances)
 
     # calculate how many goals are scored
-    match_calc.calc_goals(home_on_target, away_on_target, def_counth, att_counth, att_counta, def_counta)
+    home_goals, away_goals = match_calc.calc_goals(home_on_target, away_on_target, def_counth, att_counth, att_counta, def_counta)
+    
+    # output match data to a text file
+    text_file_match_output(home_abbr, away_abbr, data_home1, data_away1, def_counth, mid_counth, att_counth, def_counta, mid_counta, att_counta, home_chances, away_chances, home_on_target, away_on_target, home_possession, away_possession, home_goals, away_goals)
 
 main()
+

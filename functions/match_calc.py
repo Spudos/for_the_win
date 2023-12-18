@@ -36,23 +36,25 @@ def calc_on_target(home_chances, away_chances, att_counth, def_counth, att_count
 
     return home_on_target, away_on_target
 
-def calc_possesion(home_chances, away_chances):
+def calc_possession(home_chances, away_chances):
     print()
-    print("Calculating possesion for each team.....")
+    print("Calculating possession for each team.....")
     print() 
 
-    home_possesion = 0
-    away_possesion = 0
+    home_possession = 0
+    away_possession = 0
 
-    possesion_random = random.randint(-10, 10)
-    home_possesion = (int(home_chances / (away_chances + home_chances) * 100) + possesion_random)
+    possession_random = random.randint(-10, 10)
+    home_possession = (int(home_chances / (away_chances + home_chances) * 100) + possession_random)
 
-    away_possesion = 100 - home_possesion
+    away_possession = 100 - home_possession
 
     print()
-    print("Possesion calculated")
-    print("Home possesion: ", home_possesion, " away possesion: ", away_possesion)
+    print("Possession calculated")
+    print("Home possession: ", home_possession, " away possession: ", away_possession)
     print()
+
+    return home_possession, away_possession
 
 def calc_goals(home_on_target, away_on_target, def_counth, att_counth, def_counta, att_counta):
     print()
@@ -66,3 +68,5 @@ def calc_goals(home_on_target, away_on_target, def_counth, att_counth, def_count
     print("Goals scored calculated")
     print("Home goals: ", home_goals, " Away goals: ", away_goals)
     print()
+
+    return home_goals, away_goals

@@ -1,0 +1,24 @@
+Home team abbr: ALV
+Home team: ((2, 'Alexander-Arnold', 'England', 24, 'ALV', 'DEF', 10, 9, 8, 8, 8, 6, 8, 7, 10, 100, 56), (3, 'Endo', 'Spain', 31, 'ALV', 'MID', 10, 10, 8, 6, 6, 6, 8, 7, 10, 100, 58), (4, 'Nunez', 'Egypt', 30, 'ALV', 'ATT', 8, 9, 5, 10, 10, 6, 10, 7, 10, 100, 90), (6, 'Allison', 'Brazil', 30, 'ALV', 'GK', 8, 7, 4, 5, 10, 8, 8, 9, 7, 100, 82), (7, 'Van dijk', 'England', 24, 'ALV', 'DEF', 10, 9, 8, 8, 8, 6, 8, 7, 10, 100, 83), (8, 'Thiago', 'Spain', 31, 'ALV', 'MID', 10, 10, 8, 6, 6, 6, 8, 7, 10, 100, 80), (9, 'Salah', 'Egypt', 30, 'ALV', 'ATT', 8, 9, 5, 10, 10, 6, 10, 7, 10, 100, 83), (14, 'Robertson', 'England', 24, 'ALV', 'DEF', 10, 9, 8, 8, 8, 6, 8, 7, 10, 100, 77), (15, 'Konate', 'England', 24, 'ALV', 'DEF', 10, 9, 8, 8, 8, 6, 8, 7, 10, 100, 63), (16, 'Macalister', 'Spain', 31, 'ALV', 'MID', 10, 10, 8, 6, 6, 6, 8, 7, 10, 100, 57), (17, 'Diaz', 'Egypt', 30, 'ALV', 'ATT', 8, 9, 5, 10, 10, 6, 10, 7, 10, 100, 67))
+ 
+Home team defense count: 361
+Home team midfield count: 195
+Home team attack count: 240
+ 
+Away team abbr: WOL
+Away team: ((1, 'Edd', 'Brazil', 30, 'WOL', 'DEF', 8, 7, 4, 5, 10, 8, 8, 9, 7, 100, 79), (5, 'Bully', 'Norway', 21, 'WOL', 'ATT', 8, 9, 5, 10, 10, 6, 10, 7, 10, 100, 94), (10, 'Cat', 'Brazil', 30, 'WOL', 'GK', 8, 7, 4, 5, 10, 8, 8, 9, 7, 100, 63), (11, 'Monkey', 'England', 24, 'WOL', 'DEF', 10, 9, 8, 8, 8, 6, 8, 7, 10, 100, 59), (12, 'Speedy', 'Spain', 31, 'WOL', 'MID', 10, 10, 8, 6, 6, 6, 8, 7, 10, 100, 83), (13, 'Spudos', 'Egypt', 30, 'WOL', 'ATT', 8, 9, 5, 10, 10, 6, 10, 7, 10, 100, 69), (18, 'Woolley', 'Brazil', 30, 'WOL', 'DEF', 8, 7, 4, 5, 10, 8, 8, 9, 7, 100, 81), (19, 'Geoff', 'Spain', 31, 'WOL', 'MID', 10, 10, 8, 6, 6, 6, 8, 7, 10, 100, 84), (20, 'Croxford', 'Egypt', 30, 'WOL', 'ATT', 8, 9, 5, 10, 10, 6, 10, 7, 10, 100, 86), (21, 'Teddy', 'Spain', 31, 'WOL', 'MID', 10, 10, 8, 6, 6, 6, 8, 7, 10, 100, 89), (22, 'Pierce\n', 'Spain', 31, 'WOL', 'MID', 10, 10, 8, 6, 6, 6, 8, 7, 10, 100, 84))
+ 
+Away team defense count: 282
+Away team midfield count: 340
+Away team attack count: 249
+ 
+Home team chances: 11
+Home team chances on target: 9
+Home team goals: 4
+ 
+Away team chances: 15
+Away team chances on target: 10
+Away team goals: 3
+ 
+Home team possession: 47
+Away team possession: 53
