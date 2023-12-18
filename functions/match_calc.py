@@ -1,12 +1,12 @@
 import random
 
-def calc_chances(data):
+def calc_chances(mid_counth, mid_counta):
     print()
     print("Calculating the number of chances for each team.....")
     print()
 
-    home_mid = data
-    away_mid = 150
+    home_mid = mid_counth
+    away_mid = mid_counta
 
     home_random = random.randint(-5, 5)
     away_random = random.randint(-5, 5)

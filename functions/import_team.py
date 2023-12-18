@@ -2,7 +2,8 @@ import sqlite3
 
 def player_load():
     team_home = input("Please enter the team code for the home team: ").upper()
-    
+    team_away = input("Please enter the team code for the away team: ").upper()
+
     # Connect to the database
     conn = sqlite3.connect('for_the_win.db')
     cursor = conn.cursor()
@@ -11,8 +12,10 @@ def player_load():
     cursor.execute("SELECT * FROM players WHERE club = ?", (team_home,))
     team_home = cursor.fetchall()
 
+    cursor.execute("SELECT * FROM players WHERE club = ?", (team_away,))
+    team_away = cursor.fetchall()
 
     # Close the connection
     conn.close()
 
-    return team_home
+    return team_home, team_away
