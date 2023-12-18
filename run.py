@@ -12,29 +12,21 @@ def text_file_match_output(home_abbr, away_abbr, data_home1, data_away1, def_cou
     
     with open(file_name, "w") as file:
         file.write(f"Home team abbr: {home_abbr}\n")
-        file.write(f"Home team: {data_home1}\n")
-        file.write(f" \n")
-        file.write(f"Home team defense count: {def_counth}\n")
-        file.write(f"Home team midfield count: {mid_counth}\n")
-        file.write(f"Home team attack count: {att_counth}\n")        
+        for item in data_home1:
+            file.write(f"{item}\n")
         file.write(f" \n")
         file.write(f"Away team abbr: {away_abbr}\n")
-        file.write(f"Away team: {data_away1}\n")
+        for item in data_away1:
+            file.write(f"{item}\n")
+        file.write(f" \n")        
+        file.write(f"Defense - home: {def_counth} away: {def_counta}\n")
+        file.write(f"Midfield - home: {mid_counth} away: {mid_counta}\n") 
+        file.write(f"Attack - home: {att_counth} away: {att_counta}\n")       
         file.write(f" \n")
-        file.write(f"Away team defense count: {def_counta}\n")
-        file.write(f"Away team midfield count: {mid_counta}\n")
-        file.write(f"Away team attack count: {att_counta}\n")
-        file.write(f" \n")
-        file.write(f"Home team possession: {home_possession}\n")        
-        file.write(f"Home team chances: {home_chances}\n")
-        file.write(f"Home team chances on target: {home_on_target}\n")  
-        file.write(f"Home team goals: {home_goals}\n")  
-        file.write(f" \n")
-        file.write(f"Away team possession: {away_possession}\n")        
-        file.write(f"Away team chances: {away_chances}\n")
-        file.write(f"Away team chances on target: {away_on_target}\n")
-        file.write(f"Away team goals: {away_goals}\n") 
-        file.write(f" \n")
+        file.write(f"Possession - home: {home_possession} away: {away_possession}\n")        
+        file.write(f"Chances - home: {home_chances} away: {away_chances}\n")
+        file.write(f"On target - home: {home_on_target} - away: {away_on_target}\n")  
+        file.write(f"Goals - home: {home_goals} - away: {away_goals}\n")  
 
 def main():
     # load the teams based on player selections
