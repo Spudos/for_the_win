@@ -23,9 +23,17 @@ def calc_on_player_fitness(data):
         fit = int(record[15])
 
         # Perform calculation on each stat
-        perf = int((pa + co + tk + ru + sh + he + fl + st + cr) * fit / 100)
+        # Use different stats based on the value of POS
+        if pos == "GK":
+            perf = int(((pa + co + sh + he + st) + (tk + ru + fl + cr)/2) * fit / 100)
+        elif pos == "DEF":
+            perf = int(((co + tk + ru + he + st) + (pa + sh + fl + cr)/2) * fit / 100)            
+        elif pos == "MID":
+            perf = int(((pa + co + ru + fl + cr)  + (tk + sh + he + st)/2)* fit / 100) 
+        else:
+            perf = int(((co + ru + sh + fl + st)  + (pa + tk + he + cr)/2)* fit / 100)
         
-        record_with_perf = record + (perf,)  # Using tuple concatenation to add the performance
+        record_with_perf = record + (perf,)
         
         # Save the calculated result
         results.append(record_with_perf)
