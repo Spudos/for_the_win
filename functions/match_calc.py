@@ -26,8 +26,8 @@ def calc_on_target(home_chances, away_chances, att_counth, def_counth, att_count
     print("Calculating the number of on target for each team.....")
     print()
     
-    home_on_target = int(home_chances  * (att_counth / def_counta))
-    away_on_target = int(away_chances  * (att_counta / def_counth))
+    home_on_target = int(home_chances  * 0.75 * (att_counth / def_counta))
+    away_on_target = int(away_chances  * 0.75 * (att_counta / def_counth))
     
     print()
     print("On target calculated")
