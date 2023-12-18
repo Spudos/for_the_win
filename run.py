@@ -6,5 +6,6 @@ def main():
     def_count, mid_count, att_count = team_calc.calculate_team(data1)
     home_chances, away_chances = match_calc.calc_chances(mid_count)
     match_calc.calc_on_target(home_chances, away_chances, att_count, def_count)
-    
+    match_calc.calc_possesion(home_chances, away_chances)
+
 main()

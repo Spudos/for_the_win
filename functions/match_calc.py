@@ -36,4 +36,9 @@ def calc_possesion(home_chances, away_chances):
     home_possesion = 0
     away_possesion = 0
 
-    
+    possesion_random = random.randint(-20, 20)
+    home_possesion = (int(home_chances / (away_chances + home_chances) * 100) + possesion_random)
+
+    away_possesion = 100 - home_possesion
+
+    print("Home possesion: ", home_possesion, " away possesion: ", away_possesion)
