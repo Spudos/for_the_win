@@ -46,7 +46,8 @@ def text_file_match_output(hm_abbr, aw_abbr, hm_data_1, aw_data_1, hm_def_cnt, h
         file.write(f"cha - hm: {hm_cha} aw: {aw_cha}\n")
         file.write(f"On tar - hm: {hm_on_tar} - aw: {aw_on_tar}\n")  
         file.write(f"gls - hm: {hm_gls} - aw: {aw_gls}\n") 
-        file.write(f"gls {goal_list}\n") 
+        for i in goal_list:
+            file.write(f"{i}\n") 
         file.write(f" \n")
         file.write(f"motm - hm: {hm_motm[1]} perf {hm_motm[17]} - aw: {aw_motm[1]} perf {aw_motm[17]}\n")
 

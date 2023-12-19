@@ -114,6 +114,11 @@ def goals(hm_gls, aw_gls, hm_data_1, aw_data_1):
     for i in range(hm_gls):
         hm_pl_ass = random.choice(hm_ass)
         hm_pl_gls = random.choice(hm_scr)
+
+        # Check if the scorer is the same as the assister
+        while hm_pl_gls[1] == hm_pl_ass[1]:
+            hm_pl_gls = random.choice(hm_scr)
+
         print(f"hm goal {i + 1} assisted by {hm_pl_ass[1]} and scored by {hm_pl_gls[1]}")
         goal_info = {
             "goal_number": i + 1,
@@ -129,6 +134,11 @@ def goals(hm_gls, aw_gls, hm_data_1, aw_data_1):
     for i in range(aw_gls):
         aw_pl_ass = random.choice(aw_ass)
         aw_pl_gls = random.choice(aw_scr)
+
+        # Check if the scorer is the same as the assister
+        while aw_pl_gls[1] == aw_pl_ass[1]:
+            aw_pl_gls = random.choice(aw_scr)
+
         print(f"aw goal {i + 1} assisted by {aw_pl_ass[1]} and scored by {aw_pl_gls[1]}")
         goal_info = {
             "goal_number": i + 1,
