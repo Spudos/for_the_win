@@ -1,61 +1,63 @@
-from functions import import_team, player_adjustments, team_calc, match_calc
+from functions import import_team, player_adj, team_calc, match_calc
 from datetime import datetime
 import os
 
-def text_file_match_output(home_abbr, away_abbr, data_home1, data_away1, def_counth, mid_counth, att_counth, def_counta, mid_counta, att_counta, home_chances, away_chances, home_on_target, away_on_target, home_possession, away_possession, home_goals, away_goals):
+        
+
+def text_file_match_output(hm_abbr, aw_abbr, data_hm1, data_aw1, def_cnt_hm, mid_cnt_hm, att_cnt_hm, def_cnt_aw, mid_cnt_aw, att_cnt_aw, hm_chances, aw_chances, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls):
     
     # Get the current date and time
     current_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
 
     # Construct the file name with the current date and time
-    file_name = f"match_reports/match_output_{home_abbr}_v_{away_abbr}_{current_datetime}.txt"
+    file_name = f"match_reports/match_output_{hm_abbr}_v_{aw_abbr}_{current_datetime}.txt"
     
     with open(file_name, "w") as file:
-        file.write(f"Home team abbr: {home_abbr}\n")
-        for item in data_home1:
+        file.write(f"hm team abbr: {hm_abbr}\n")
+        for item in data_hm1:
             file.write(f"Pos: {item[5]} - Player: {item[1]} - TS: {item[16]} - Perf: {item[17]}\n")
         file.write(f" \n")
-        file.write(f"Away team abbr: {away_abbr}\n")
-        for item in data_away1:
+        file.write(f"aw team abbr: {aw_abbr}\n")
+        for item in data_aw1:
             file.write(f"Pos: {item[5]} - Player: {item[1]} - TS: {item[16]} - Perf: {item[17]}\n")
         file.write(f" \n")        
-        file.write(f"Defense - home: {def_counth} away: {def_counta}\n")
-        file.write(f"Midfield - home: {mid_counth} away: {mid_counta}\n") 
-        file.write(f"Attack - home: {att_counth} away: {att_counta}\n")       
+        file.write(f"Defense - hm: {def_cnt_hm} aw: {def_cnt_aw}\n")
+        file.write(f"Midfield - hm: {mid_cnt_hm} aw: {mid_cnt_aw}\n") 
+        file.write(f"Attack - hm: {att_cnt_hm} aw: {att_cnt_aw}\n")       
         file.write(f" \n")
-        file.write(f"Possession - home: {home_possession} away: {away_possession}\n")        
-        file.write(f"Chances - home: {home_chances} away: {away_chances}\n")
-        file.write(f"On target - home: {home_on_target} - away: {away_on_target}\n")  
-        file.write(f"Goals - home: {home_goals} - away: {away_goals}\n")  
+        file.write(f"poss - hm: {hm_poss} aw: {aw_poss}\n")        
+        file.write(f"Chances - hm: {hm_chances} aw: {aw_chances}\n")
+        file.write(f"On tar - hm: {hm_on_tar} - aw: {aw_on_tar}\n")  
+        file.write(f"gls - hm: {hm_gls} - aw: {aw_gls}\n")  
 
 def main():
     # load the teams based on player selections
-    home, away, home_abbr, away_abbr = import_team.player_load()
+    hm, aw, hm_abbr, aw_abbr = import_team.player_load()
     
-    # make player adjustments and calculate team values for the home team
-    data_home = player_adjustments.calc_on_player_fitness(home)
-    data_home1 = player_adjustments.calc_on_player_random_perf(data_home)
-    def_counth, mid_counth, att_counth = team_calc.calculate_team(data_home1)
+    # make player adj and calculate team values for the hm team
+    data_hm = player_adj.calc_on_player_fitness(hm)
+    data_hm1 = player_adj.calc_on_player_random_perf(data_hm)
+    def_cnt_hm, mid_cnt_hm, att_cnt_hm = team_calc.calculate_team(data_hm1)
     
-    # make player adjustments and calculate team values for the away team
-    data_away = player_adjustments.calc_on_player_fitness(away)
-    data_away1 = player_adjustments.calc_on_player_random_perf(data_away)
-    def_counta, mid_counta, att_counta = team_calc.calculate_team(data_away1)
+    # make player adj and calculate team values for the aw team
+    data_aw = player_adj.calc_on_player_fitness(aw)
+    data_aw1 = player_adj.calc_on_player_random_perf(data_aw)
+    def_cnt_aw, mid_cnt_aw, att_cnt_aw = team_calc.calculate_team(data_aw1)
 
     # calculate the number of chances per team
-    home_chances, away_chances = match_calc.calc_chances(mid_counth, mid_counta)
+    hm_chances, aw_chances = match_calc.calc_chances(mid_cnt_hm, mid_cnt_aw)
 
-    # claculate how many chances are on target
-    home_on_target, away_on_target = match_calc.calc_on_target(home_chances, away_chances, att_counth, def_counth, att_counta, def_counta)
+    # claculate how many chances are on tar
+    hm_on_tar, aw_on_tar = match_calc.calc_on_tar(hm_chances, aw_chances, att_cnt_hm, def_cnt_hm, att_cnt_aw, def_cnt_aw)
 
     # calculate the possesion stats
-    home_possession, away_possession = match_calc.calc_possession(home_chances, away_chances)
+    hm_poss, aw_poss = match_calc.calc_poss(hm_chances, aw_chances)
 
-    # calculate how many goals are scored
-    home_goals, away_goals = match_calc.calc_goals(home_on_target, away_on_target, def_counth, att_counth, att_counta, def_counta)
+    # calculate how many gls are scored
+    hm_gls, aw_gls = match_calc.calc_gls(hm_on_tar, aw_on_tar, def_cnt_hm, att_cnt_hm, att_cnt_aw, def_cnt_aw)
     
     # output match data to a text file
-    text_file_match_output(home_abbr, away_abbr, data_home1, data_away1, def_counth, mid_counth, att_counth, def_counta, mid_counta, att_counta, home_chances, away_chances, home_on_target, away_on_target, home_possession, away_possession, home_goals, away_goals)
+    text_file_match_output(hm_abbr, aw_abbr, data_hm1, data_aw1, def_cnt_hm, mid_cnt_hm, att_cnt_hm, def_cnt_aw, mid_cnt_aw, att_cnt_aw, hm_chances, aw_chances, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls)
 
 main()
 

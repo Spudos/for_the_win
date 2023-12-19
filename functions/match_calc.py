@@ -1,72 +1,72 @@
 import random
 
-def calc_chances(mid_counth, mid_counta):
+def calc_chances(mid_cnt_hm, mid_cnt_aw):
     print()
     print("Calculating the number of chances for each team.....")
     print()
 
-    home_mid = mid_counth
-    away_mid = mid_counta
+    hm_mid = mid_cnt_hm
+    aw_mid = mid_cnt_aw
 
-    home_random = random.randint(-5, 5)
-    away_random = random.randint(-5, 5)
+    hm_random = random.randint(-5, 5)
+    aw_random = random.randint(-5, 5)
     
-    home_chances = int((home_mid / (home_mid + away_mid)) * 30) + home_random
-    away_chances = int((away_mid / (home_mid + away_mid)) * 30) + away_random
+    hm_chances = int((hm_mid / (hm_mid + aw_mid)) * 30) + hm_random
+    aw_chances = int((aw_mid / (hm_mid + aw_mid)) * 30) + aw_random
 
     print()
     print("Team chances calculated")
-    print(f"Home chances: ", home_chances, " Away chances: ", away_chances)
+    print(f"hm chances: ", hm_chances, " aw chances: ", aw_chances)
     print()
 
-    return home_chances, away_chances
+    return hm_chances, aw_chances
 
-def calc_on_target(home_chances, away_chances, att_counth, def_counth, att_counta, def_counta):
+def calc_on_tar(hm_chances, aw_chances, att_cnt_hm, def_cnt_hm, att_cnt_aw, def_cnt_aw):
     print()
-    print("Calculating the number of on target for each team.....")
+    print("Calculating the number of on tar for each team.....")
     print()
     
-    home_on_target = int(home_chances  * 0.75 * (att_counth / def_counta))
-    away_on_target = int(away_chances  * 0.75 * (att_counta / def_counth))
+    hm_on_tar = int(hm_chances  * 0.75 * (att_cnt_hm / def_cnt_aw))
+    aw_on_tar = int(aw_chances  * 0.75 * (att_cnt_aw / def_cnt_hm))
     
     print()
-    print("On target calculated")
-    print("Home on target: ", home_on_target, " away on target: ", away_on_target)
+    print("On tar calculated")
+    print("hm on tar: ", hm_on_tar, " aw on tar: ", aw_on_tar)
     print()
 
-    return home_on_target, away_on_target
+    return hm_on_tar, aw_on_tar
 
-def calc_possession(home_chances, away_chances):
+def calc_poss(hm_chances, aw_chances):
     print()
-    print("Calculating possession for each team.....")
+    print("Calculating poss for each team.....")
     print() 
 
-    home_possession = 0
-    away_possession = 0
+    hm_poss = 0
+    aw_poss = 0
 
-    possession_random = random.randint(-10, 10)
-    home_possession = (int(home_chances / (away_chances + home_chances) * 100) + possession_random)
+    poss_random = random.randint(-10, 10)
+    hm_poss = (int(hm_chances / (aw_chances + hm_chances) * 100) + poss_random)
 
-    away_possession = 100 - home_possession
+    aw_poss = 100 - hm_poss
 
     print()
-    print("Possession calculated")
-    print("Home possession: ", home_possession, " away possession: ", away_possession)
+    print("poss calculated")
+    print("hm poss: ", hm_poss, " aw poss: ", aw_poss)
     print()
 
-    return home_possession, away_possession
+    return hm_poss, aw_poss
 
-def calc_goals(home_on_target, away_on_target, def_counth, att_counth, def_counta, att_counta):
+def calc_gls(hm_on_tar, aw_on_tar, def_cnt_hm, att_cnt_hm, def_cnt_aw, att_cnt_aw):
     print()
-    print("Calculating goals scored for each team.....")
+    print("Calculating gls scored for each team.....")
     print() 
 
-    home_goals = int(((att_counth / def_counta) * 0.7 * home_on_target)/2)
-    away_goals = int(((att_counta / def_counth) * 0.7 * away_on_target)/2)
+    hm_gls = int(((att_cnt_hm / def_cnt_aw) * 0.7 * hm_on_tar)/2)
+    aw_gls = int(((att_cnt_aw / def_cnt_hm) * 0.7 * aw_on_tar)/2)
 
     print()
-    print("Goals scored calculated")
-    print("Home goals: ", home_goals, " Away goals: ", away_goals)
+    print("gls scored calculated")
+    print("hm gls: ", hm_gls, " aw gls: ", aw_gls)
     print()
 
-    return home_goals, away_goals
+    return hm_gls, aw_gls
