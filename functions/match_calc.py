@@ -85,50 +85,38 @@ def generate_top_5(team_list, mid_adj, att_adj):
     
     return top_5
     
-def goals(hm_gls, aw_gls, hm_data_1, aw_data_1):
+def generate_goal_info(player_assist, player_score, team):
+    goal_info = {
+        "team": team,
+        "assisted_by": player_assist[1],
+        "scored_by": player_score[1]
+    }
+    return goal_info
+
+def generate_goals(team_gls, team_data, team_name):
     goal_list = []
+    team_ass = generate_top_5(team_data, 30, 15)
+    team_scr = generate_top_5(team_data, 15, 30)
 
-    hm_ass = generate_top_5(hm_data_1, 30, 15)
-    hm_scr = generate_top_5(hm_data_1, 15, 30)
-
-    for i in range(hm_gls):
-        hm_pl_ass = random.choice(hm_ass)
-        hm_pl_gls = random.choice(hm_scr)
-
-        # Check if the scorer is the same as the assister
-        while hm_pl_gls[1] == hm_pl_ass[1]:
-            hm_pl_gls = random.choice(hm_scr)
-
-        print(f"hm goal {i + 1} assisted by {hm_pl_ass[1]} and scored by {hm_pl_gls[1]}")
-        goal_info = {
-            "goal_number": i + 1,
-            "team": "hm",
-            "assisted_by": hm_pl_ass[1],
-            "scored_by": hm_pl_gls[1]
-        }
-        goal_list.append(goal_info)
-
-    aw_ass = generate_top_5(aw_data_1, 30, 15)
-    aw_scr = generate_top_5(aw_data_1, 15, 30)
-
-    for i in range(aw_gls):
-        aw_pl_ass = random.choice(aw_ass)
-        aw_pl_gls = random.choice(aw_scr)
+    for i in range(team_gls):
+        pl_ass = random.choice(team_ass)
+        pl_gls = random.choice(team_scr)
 
         # Check if the scorer is the same as the assister
-        while aw_pl_gls[1] == aw_pl_ass[1]:
-            aw_pl_gls = random.choice(aw_scr)
+        while pl_gls[1] == pl_ass[1]:
+            pl_gls = random.choice(team_scr)
 
-        print(f"aw goal {i + 1} assisted by {aw_pl_ass[1]} and scored by {aw_pl_gls[1]}")
-        goal_info = {
-            "goal_number": i + 1,
-            "team": "aw",
-            "assisted_by": aw_pl_ass[1],
-            "scored_by": aw_pl_gls[1]
-        }
+        print(f"{team_name} goal {i + 1} assisted by {pl_ass[1]} and scored by {pl_gls[1]}")
+        goal_info = generate_goal_info(pl_ass, pl_gls, team_name)
         goal_list.append(goal_info)
 
     return goal_list
+
+def goals(hm_gls, aw_gls, hm_data_1, aw_data_1):
+    hm_goals = generate_goals(hm_gls, hm_data_1, "hm")
+    aw_goals = generate_goals(aw_gls, aw_data_1, "aw")
+    return hm_goals + aw_goals
+
 
 def run_match(hm_mid_cnt, aw_mid_cnt, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt, hm_data_1, aw_data_1):
     hm_cha, aw_cha = calc_cha(hm_mid_cnt, aw_mid_cnt)
