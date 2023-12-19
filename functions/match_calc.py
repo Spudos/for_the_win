@@ -61,8 +61,8 @@ def calc_goals(home_on_target, away_on_target, def_counth, att_counth, def_count
     print("Calculating goals scored for each team.....")
     print() 
 
-    home_goals = int(((att_counth / def_counta) * home_on_target)/2)
-    away_goals = int(((att_counta / def_counth) * away_on_target)/2)
+    home_goals = int(((att_counth / def_counta) * 0.7 * home_on_target)/2)
+    away_goals = int(((att_counta / def_counth) * 0.7 * away_on_target)/2)
 
     print()
     print("Goals scored calculated")
