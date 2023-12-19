@@ -1,12 +1,12 @@
 import random
 
-def calc_cha(mid_cnt_hm, mid_cnt_aw):
+def calc_cha(hm_mid_cnt, aw_mid_cnt):
     print()
     print("Calculating the number of cha for each team.....")
     print()
 
-    hm_mid = mid_cnt_hm
-    aw_mid = mid_cnt_aw
+    hm_mid = hm_mid_cnt
+    aw_mid = aw_mid_cnt
 
     hm_random = random.randint(-5, 5)
     aw_random = random.randint(-5, 5)
@@ -21,13 +21,13 @@ def calc_cha(mid_cnt_hm, mid_cnt_aw):
 
     return hm_cha, aw_cha
 
-def calc_on_tar(hm_cha, aw_cha, att_cnt_hm, def_cnt_hm, att_cnt_aw, def_cnt_aw):
+def calc_on_tar(hm_cha, aw_cha, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt):
     print()
     print("Calculating the number of on tar for each team.....")
     print()
     
-    hm_on_tar = int(hm_cha  * 0.75 * (att_cnt_hm / def_cnt_aw))
-    aw_on_tar = int(aw_cha  * 0.75 * (att_cnt_aw / def_cnt_hm))
+    hm_on_tar = int(hm_cha  * 0.75 * (hm_att_cnt / aw_def_cnt))
+    aw_on_tar = int(aw_cha  * 0.75 * (aw_att_cnt / hm_def_cnt))
     
     print()
     print("On tar calculated")
@@ -56,13 +56,13 @@ def calc_poss(hm_cha, aw_cha):
 
     return hm_poss, aw_poss
 
-def calc_gls(hm_on_tar, aw_on_tar, def_cnt_hm, att_cnt_hm, def_cnt_aw, att_cnt_aw):
+def calc_gls(hm_on_tar, aw_on_tar, hm_def_cnt, hm_att_cnt, aw_def_cnt, aw_att_cnt):
     print()
     print("Calculating gls scored for each team.....")
     print() 
 
-    hm_gls = int(((att_cnt_hm / def_cnt_aw) * 0.7 * hm_on_tar)/2)
-    aw_gls = int(((att_cnt_aw / def_cnt_hm) * 0.7 * aw_on_tar)/2)
+    hm_gls = int(((hm_att_cnt / aw_def_cnt) * 0.7 * hm_on_tar)/2)
+    aw_gls = int(((aw_att_cnt / hm_def_cnt) * 0.7 * aw_on_tar)/2)
 
     print()
     print("gls scored calculated")

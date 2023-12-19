@@ -2,9 +2,26 @@ from functions import import_team, player_adj, team_calc, match_calc
 from datetime import datetime
 import os
 
-        
+class Match():
+    def __init__(self,hm_abbr, aw_abbr, hm_def_cnt, hm_mid_cnt, hm_att_cnt, aw_def_cnt, aw_mid_cnt, aw_att_cnt, hm_cha, aw_cha, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls):
+        self.hm_abbr = hm_abbr
+        self.aw_abbr = aw_abbr
+        self.hm_def_cnt = hm_def_cnt
+        self.hm_mid_cnt = hm_mid_cnt
+        self.hm_att_cnt = hm_att_cnt
+        self.aw_def_cnt = aw_def_cnt
+        self.aw_mid_cnt = aw_mid_cnt
+        self.aw_att_cnt = aw_att_cnt
+        self.hm_cha = hm_cha
+        self.aw_cha = aw_cha
+        self.hm_on_tar = hm_on_tar
+        self.aw_on_tar = aw_on_tar
+        self.hm_poss = hm_poss
+        self.aw_poss = aw_poss
+        self.hm_gls = hm_gls
+        self.aw_gls = aw_gls
 
-def text_file_match_output(hm_abbr, aw_abbr, data_hm1, data_aw1, def_cnt_hm, mid_cnt_hm, att_cnt_hm, def_cnt_aw, mid_cnt_aw, att_cnt_aw, hm_cha, aw_cha, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls):
+def text_file_match_output(hm_abbr, aw_abbr, data_hm1, data_aw1, hm_def_cnt, hm_mid_cnt, hm_att_cnt, aw_def_cnt, aw_mid_cnt, aw_att_cnt, hm_cha, aw_cha, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls):
     
     # Get the current date and time
     current_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -21,9 +38,9 @@ def text_file_match_output(hm_abbr, aw_abbr, data_hm1, data_aw1, def_cnt_hm, mid
         for item in data_aw1:
             file.write(f"Pos: {item[5]} - Player: {item[1]} - TS: {item[16]} - Perf: {item[17]}\n")
         file.write(f" \n")        
-        file.write(f"Defense - hm: {def_cnt_hm} aw: {def_cnt_aw}\n")
-        file.write(f"Midfield - hm: {mid_cnt_hm} aw: {mid_cnt_aw}\n") 
-        file.write(f"Attack - hm: {att_cnt_hm} aw: {att_cnt_aw}\n")       
+        file.write(f"Defense - hm: {hm_def_cnt} aw: {aw_def_cnt}\n")
+        file.write(f"Midfield - hm: {hm_mid_cnt} aw: {aw_mid_cnt}\n") 
+        file.write(f"Attack - hm: {hm_att_cnt} aw: {aw_att_cnt}\n")       
         file.write(f" \n")
         file.write(f"poss - hm: {hm_poss} aw: {aw_poss}\n")        
         file.write(f"cha - hm: {hm_cha} aw: {aw_cha}\n")
@@ -37,27 +54,27 @@ def main():
     # make player adj and calculate team values for the hm team
     data_hm = player_adj.calc_on_player_fitness(hm)
     data_hm1 = player_adj.calc_on_player_random_perf(data_hm)
-    def_cnt_hm, mid_cnt_hm, att_cnt_hm = team_calc.calculate_team(data_hm1)
+    hm_def_cnt, hm_mid_cnt, hm_att_cnt = team_calc.calculate_team(data_hm1)
     
     # make player adj and calculate team values for the aw team
     data_aw = player_adj.calc_on_player_fitness(aw)
     data_aw1 = player_adj.calc_on_player_random_perf(data_aw)
-    def_cnt_aw, mid_cnt_aw, att_cnt_aw = team_calc.calculate_team(data_aw1)
+    aw_def_cnt, aw_mid_cnt, aw_att_cnt = team_calc.calculate_team(data_aw1)
 
     # calculate the number of cha per team
-    hm_cha, aw_cha = match_calc.calc_cha(mid_cnt_hm, mid_cnt_aw)
+    hm_cha, aw_cha = match_calc.calc_cha(hm_mid_cnt, aw_mid_cnt)
 
     # claculate how many cha are on tar
-    hm_on_tar, aw_on_tar = match_calc.calc_on_tar(hm_cha, aw_cha, att_cnt_hm, def_cnt_hm, att_cnt_aw, def_cnt_aw)
+    hm_on_tar, aw_on_tar = match_calc.calc_on_tar(hm_cha, aw_cha, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt)
 
     # calculate the possesion stats
     hm_poss, aw_poss = match_calc.calc_poss(hm_cha, aw_cha)
 
     # calculate how many gls are scored
-    hm_gls, aw_gls = match_calc.calc_gls(hm_on_tar, aw_on_tar, def_cnt_hm, att_cnt_hm, att_cnt_aw, def_cnt_aw)
+    hm_gls, aw_gls = match_calc.calc_gls(hm_on_tar, aw_on_tar, hm_def_cnt, hm_att_cnt, aw_att_cnt, aw_def_cnt)
     
     # output match data to a text file
-    text_file_match_output(hm_abbr, aw_abbr, data_hm1, data_aw1, def_cnt_hm, mid_cnt_hm, att_cnt_hm, def_cnt_aw, mid_cnt_aw, att_cnt_aw, hm_cha, aw_cha, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls)
+    text_file_match_output(hm_abbr, aw_abbr, data_hm1, data_aw1, hm_def_cnt, hm_mid_cnt, hm_att_cnt, aw_def_cnt, aw_mid_cnt, aw_att_cnt, hm_cha, aw_cha, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls)
 
 main()
 
