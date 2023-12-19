@@ -76,12 +76,12 @@ def motm(hm_data_1, aw_data_1):
     print("Calculating motm for each team.....")
     print() 
     
-    hm_motm = max(hm_data_1, key=lambda x: x[17])
-    aw_motm = max(aw_data_1, key=lambda x: x[17])
+    hm_motm = max(hm_data_1, key=lambda x: x[21])
+    aw_motm = max(aw_data_1, key=lambda x: x[21])
 
     print()
     print("motm calculated")
-    print(f"hm motm: {hm_motm[1]}  - perf {hm_motm[17]}  aw motm: {aw_motm[1]} - perf {aw_motm[17]}")
+    print(f"hm motm: {hm_motm[1]}  - perf {hm_motm[21]}  aw motm: {aw_motm[1]} - perf {aw_motm[21]}")
     print()
 
     return hm_motm, aw_motm
@@ -91,16 +91,16 @@ def generate_top_5(team_list, mid_adj, att_adj):
     for item in team_list:
         item = list(item)
         if item[5] == 'MID':
-            item.append(item[17] + mid_adj)
+            item.append(item[21] + mid_adj)
             new_list.append(item)
         elif item[5] == 'ATT':
-            item.append(item[17] + att_adj)
+            item.append(item[21] + att_adj)
             new_list.append(item)
         else:
-            item.append(item[17] + 0)
+            item.append(item[21] + 0)
             new_list.append(item)    
 
-    sort_hm_data_1 = sorted(new_list, key=lambda x: x[18], reverse=True)   
+    sort_hm_data_1 = sorted(new_list, key=lambda x: x[22], reverse=True)   
     top_5 = [player for player in sort_hm_data_1[:5] if player[5] != 'GK']
     
     return top_5

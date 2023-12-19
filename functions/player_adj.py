@@ -54,13 +54,13 @@ def calc_on_player_random_perf(data):
 
     for i, record in enumerate(data):
         name = record[1]
-        perf = int(record[17])
+        perf = int(record[21])
 
         random_adjustment = random.randint(-20, 20)
         new_perf = int(perf + random_adjustment)
 
         # Save the adjusted performance value to the record
-        record = record[:17] + (new_perf,)
+        record = record[:21] + (new_perf,)
         data[i] = record
         
         print(name, perf, " ---> ", new_perf)
