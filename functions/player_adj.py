@@ -53,6 +53,8 @@ def calc_on_player_random_perf(data):
 
         print (f"player: {record[1]} pos: {record[5]} perf: {record[22]}")
 
+    print()
+    
     return data
 
 def run_player_adj(hm,aw):

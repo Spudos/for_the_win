@@ -1,6 +1,4 @@
 def calculate_team(data):
-    print()
-    print("Calculating total team values.....")
     # Initialize position counters
     def_count = 0
     mid_count = 0
