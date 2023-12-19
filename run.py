@@ -21,10 +21,10 @@ class Match():
         self.hm_gls = hm_gls
         self.aw_gls = aw_gls
 
-def text_file_match_output(hm_abbr, aw_abbr, data_hm1, data_aw1, hm_def_cnt, hm_mid_cnt, hm_att_cnt, aw_def_cnt, aw_mid_cnt, aw_att_cnt, hm_cha, aw_cha, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls):
+def text_file_match_output(hm_abbr, aw_abbr, data_hm1, data_aw1, hm_def_cnt, hm_mid_cnt, hm_att_cnt, aw_def_cnt, aw_mid_cnt, aw_att_cnt, hm_cha, aw_cha, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls, hm_motm, aw_motm):
     
     # Get the current date and time
-    current_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
+    current_datetime = datetime.now().strftime("%Y%m%d_%H%M")
 
     # Construct the file name with the current date and time
     file_name = f"match_reports/match_output_{hm_abbr}_v_{aw_abbr}_{current_datetime}.txt"
@@ -46,6 +46,8 @@ def text_file_match_output(hm_abbr, aw_abbr, data_hm1, data_aw1, hm_def_cnt, hm_
         file.write(f"cha - hm: {hm_cha} aw: {aw_cha}\n")
         file.write(f"On tar - hm: {hm_on_tar} - aw: {aw_on_tar}\n")  
         file.write(f"gls - hm: {hm_gls} - aw: {aw_gls}\n")  
+        file.write(f" \n")
+        file.write(f"motm - hm: {hm_motm[1]} perf {hm_motm[17]} - aw: {aw_motm[1]} perf {aw_motm[17]}\n")
 
 def main():
     # load the teams based on player selections
@@ -73,8 +75,12 @@ def main():
     # calculate how many gls are scored
     hm_gls, aw_gls = match_calc.calc_gls(hm_on_tar, aw_on_tar, hm_def_cnt, hm_att_cnt, aw_att_cnt, aw_def_cnt)
     
-    # output match data to a text file
-    text_file_match_output(hm_abbr, aw_abbr, data_hm1, data_aw1, hm_def_cnt, hm_mid_cnt, hm_att_cnt, aw_def_cnt, aw_mid_cnt, aw_att_cnt, hm_cha, aw_cha, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls)
+    # calculate motm for each team
+    hm_motm, aw_motm = match_calc.motm(data_hm1, data_aw1)
 
+    # output match data to a text file
+    text_file_match_output(hm_abbr, aw_abbr, data_hm1, data_aw1, hm_def_cnt, hm_mid_cnt, hm_att_cnt, aw_def_cnt, aw_mid_cnt, aw_att_cnt, hm_cha, aw_cha, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls, hm_motm, aw_motm)
+
+    print(match_calc.assists(hm_gls, aw_gls, data_hm1, data_aw1))
 main()
 
