@@ -13,11 +13,11 @@ def text_file_match_output(home_abbr, away_abbr, data_home1, data_away1, def_cou
     with open(file_name, "w") as file:
         file.write(f"Home team abbr: {home_abbr}\n")
         for item in data_home1:
-            file.write(f"Pos: {item[5]} - Player: {item[1]} - Perf: {item[16]}\n")
+            file.write(f"Pos: {item[5]} - Player: {item[1]} - TS: {item[16]} - Perf: {item[17]}\n")
         file.write(f" \n")
         file.write(f"Away team abbr: {away_abbr}\n")
         for item in data_away1:
-            file.write(f"Pos: {item[5]} - Player: {item[1]} - Perf: {item[16]}\n")
+            file.write(f"Pos: {item[5]} - Player: {item[1]} - TS: {item[16]} - Perf: {item[17]}\n")
         file.write(f" \n")        
         file.write(f"Defense - home: {def_counth} away: {def_counta}\n")
         file.write(f"Midfield - home: {mid_counth} away: {mid_counta}\n") 

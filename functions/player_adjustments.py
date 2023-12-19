@@ -32,14 +32,17 @@ def calc_on_player_fitness(data):
             perf = int(((pa + co + ru + fl + cr)  + (tk + sh + he + st)/2)* fit / 100) 
         else:
             perf = int(((co + ru + sh + fl + st)  + (pa + tk + he + cr)/2)* fit / 100)
+
+        ts = co + ru + sh + fl + st  + pa + tk + he + cr
         
-        record_with_perf = record + (perf,)
+        record_with_perf = record + (ts,) + (perf,)
         
         # Save the calculated result
         results.append(record_with_perf)
         
         print(record_with_perf)
 
+        
 
     return results
 
@@ -53,13 +56,13 @@ def calc_on_player_random_perf(data):
 
     for i, record in enumerate(data):
         name = record[1]
-        perf = int(record[16])
+        perf = int(record[17])
 
         random_adjustment = random.randint(-20, 20)
         new_perf = int(perf + random_adjustment)
 
         # Save the adjusted performance value to the record
-        record = record[:16] + (new_perf,)
+        record = record[:17] + (new_perf,)
         data[i] = record
         
         print(name, perf, " ---> ", new_perf)
