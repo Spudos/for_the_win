@@ -71,12 +71,6 @@ def calc_gls(hm_on_tar, aw_on_tar, hm_def_cnt, hm_att_cnt, aw_def_cnt, aw_att_cn
 
     return hm_gls, aw_gls
 
-def assists(hm_gls, aw_gls, data_hm1, data_aw1):
-    hm_ass = max(data_hm1, key=lambda x: x[17])
-   
-    aw_ass = max(data_aw1, key=lambda x: x[17])
-    
-
 def motm(data_hm1, data_aw1):
     print()
     print("Calculating motm for each team.....")
@@ -91,3 +85,7 @@ def motm(data_hm1, data_aw1):
     print()
 
     return hm_motm, aw_motm
+
+def assists(hm_gls, aw_gls, data_hm1, data_aw1):
+    hm_ass = max(data_hm1, key=lambda x: x[17]) 
+    aw_ass = max(data_aw1, key=lambda x: x[17])
