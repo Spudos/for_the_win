@@ -18,4 +18,4 @@ def player_load():
     # Close the connection
     conn.close()
 
-    return team_hm, team_aw, hm_abbr, aw_abbr
+    return list(team_hm), list(team_aw), hm_abbr, aw_abbr

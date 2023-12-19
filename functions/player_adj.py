@@ -52,8 +52,6 @@ def calc_on_player_random_perf(data):
     print("Calculating randomly adjusted perf for players.....")
     print()
 
-    data = list(data)
-
     for i, record in enumerate(data):
         name = record[1]
         perf = int(record[17])
@@ -66,9 +64,6 @@ def calc_on_player_random_perf(data):
         data[i] = record
         
         print(name, perf, " ---> ", new_perf)
-
-    # Convert the list back to a tuple if needed
-    data = tuple(data)
 
     return data
 

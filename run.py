@@ -21,7 +21,7 @@ class Match():
         self.hm_gls = hm_gls
         self.aw_gls = aw_gls
 
-def text_file_match_output(hm_abbr, aw_abbr, data_hm1, data_aw1, hm_def_cnt, hm_mid_cnt, hm_att_cnt, aw_def_cnt, aw_mid_cnt, aw_att_cnt, hm_cha, aw_cha, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls, hm_motm, aw_motm):
+def text_file_match_output(hm_abbr, aw_abbr, hm_data_1, aw_data_1, hm_def_cnt, hm_mid_cnt, hm_att_cnt, aw_def_cnt, aw_mid_cnt, aw_att_cnt, hm_cha, aw_cha, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls, hm_motm, aw_motm):
     
     # Get the current date and time
     current_datetime = datetime.now().strftime("%Y%m%d_%H%M")
@@ -31,11 +31,11 @@ def text_file_match_output(hm_abbr, aw_abbr, data_hm1, data_aw1, hm_def_cnt, hm_
     
     with open(file_name, "w") as file:
         file.write(f"hm team abbr: {hm_abbr}\n")
-        for item in data_hm1:
+        for item in hm_data_1:
             file.write(f"Pos: {item[5]} - Player: {item[1]} - TS: {item[16]} - Perf: {item[17]}\n")
         file.write(f" \n")
         file.write(f"aw team abbr: {aw_abbr}\n")
-        for item in data_aw1:
+        for item in aw_data_1:
             file.write(f"Pos: {item[5]} - Player: {item[1]} - TS: {item[16]} - Perf: {item[17]}\n")
         file.write(f" \n")        
         file.write(f"Defense - hm: {hm_def_cnt} aw: {aw_def_cnt}\n")
@@ -54,14 +54,14 @@ def main():
     hm, aw, hm_abbr, aw_abbr = import_team.player_load()
     
     # make player adj and calculate team values for the hm team
-    data_hm = player_adj.calc_on_player_fitness(hm)
-    data_hm1 = player_adj.calc_on_player_random_perf(data_hm)
-    hm_def_cnt, hm_mid_cnt, hm_att_cnt = team_calc.calculate_team(data_hm1)
+    hm_data = player_adj.calc_on_player_fitness(hm)
+    hm_data_1 = player_adj.calc_on_player_random_perf(hm_data)
+    hm_def_cnt, hm_mid_cnt, hm_att_cnt = team_calc.calculate_team(hm_data_1)
     
     # make player adj and calculate team values for the aw team
-    data_aw = player_adj.calc_on_player_fitness(aw)
-    data_aw1 = player_adj.calc_on_player_random_perf(data_aw)
-    aw_def_cnt, aw_mid_cnt, aw_att_cnt = team_calc.calculate_team(data_aw1)
+    aw_data = player_adj.calc_on_player_fitness(aw)
+    aw_data_1 = player_adj.calc_on_player_random_perf(aw_data)
+    aw_def_cnt, aw_mid_cnt, aw_att_cnt = team_calc.calculate_team(aw_data_1)
 
     # calculate the number of cha per team
     hm_cha, aw_cha = match_calc.calc_cha(hm_mid_cnt, aw_mid_cnt)
@@ -75,12 +75,17 @@ def main():
     # calculate how many gls are scored
     hm_gls, aw_gls = match_calc.calc_gls(hm_on_tar, aw_on_tar, hm_def_cnt, hm_att_cnt, aw_att_cnt, aw_def_cnt)
     
+    # calculate who made assists
+    match_calc.assists(hm_gls, aw_gls, hm_data_1, aw_data_1)
+
+    # calculate who scored
+    match_calc.scorers(hm_gls, aw_gls, hm_data_1, aw_data_1)
+    
     # calculate motm for each team
-    hm_motm, aw_motm = match_calc.motm(data_hm1, data_aw1)
+    hm_motm, aw_motm = match_calc.motm(hm_data_1, aw_data_1)
 
     # output match data to a text file
-    text_file_match_output(hm_abbr, aw_abbr, data_hm1, data_aw1, hm_def_cnt, hm_mid_cnt, hm_att_cnt, aw_def_cnt, aw_mid_cnt, aw_att_cnt, hm_cha, aw_cha, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls, hm_motm, aw_motm)
+    text_file_match_output(hm_abbr, aw_abbr, hm_data_1, aw_data_1, hm_def_cnt, hm_mid_cnt, hm_att_cnt, aw_def_cnt, aw_mid_cnt, aw_att_cnt, hm_cha, aw_cha, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls, hm_motm, aw_motm)
 
-    print(match_calc.assists(hm_gls, aw_gls, data_hm1, data_aw1))
 main()
 

@@ -71,13 +71,13 @@ def calc_gls(hm_on_tar, aw_on_tar, hm_def_cnt, hm_att_cnt, aw_def_cnt, aw_att_cn
 
     return hm_gls, aw_gls
 
-def motm(data_hm1, data_aw1):
+def motm(hm_data_1, aw_data_1):
     print()
     print("Calculating motm for each team.....")
     print() 
     
-    hm_motm = max(data_hm1, key=lambda x: x[17])
-    aw_motm = max(data_aw1, key=lambda x: x[17])
+    hm_motm = max(hm_data_1, key=lambda x: x[17])
+    aw_motm = max(aw_data_1, key=lambda x: x[17])
 
     print()
     print("motm calculated")
@@ -86,6 +86,88 @@ def motm(data_hm1, data_aw1):
 
     return hm_motm, aw_motm
 
-def assists(hm_gls, aw_gls, data_hm1, data_aw1):
-    hm_ass = max(data_hm1, key=lambda x: x[17]) 
-    aw_ass = max(data_aw1, key=lambda x: x[17])
+def assists(hm_gls, aw_gls, hm_data_1, aw_data_1):
+    print()
+    print("Calculating assists.....")
+    print() 
+    
+    new_list = []
+    for item in hm_data_1:
+        item = list(item)
+        if item[5] == 'MID':
+            item.append(item[17] + 30)
+            new_list.append(item)
+        elif item[5] == 'ATT':
+            item.append(item[17] + 15)
+            new_list.append(item)
+        else:
+            item.append(item[17] + 0)
+            new_list.append(item)    
+
+    sort_hm_data_1 = sorted(new_list, key=lambda x: x[18], reverse=True)   
+    top_5 = [player for player in sort_hm_data_1[:5] if player[5] != 'GK']
+    for i in range(hm_gls):
+        hm_pl_ass = random.choice(top_5)
+        print(f"hm goal {i + 1} assisted by {hm_pl_ass[1]}")
+
+    new_list = []
+    for item in aw_data_1:
+        item = list(item)
+        if item[5] == 'MID':
+            item.append(item[17] + 30)
+            new_list.append(item)
+        elif item[5] == 'ATT':
+            item.append(item[17] + 15)
+            new_list.append(item)
+        else:
+            item.append(item[17] + 0)
+            new_list.append(item)    
+
+    sort_aw_data_1 = sorted(new_list, key=lambda x: x[18], reverse=True)
+    top_5 = [player for player in sort_aw_data_1[:5] if player[5] != 'GK']
+    for i in range(aw_gls):
+        aw_pl_ass = random.choice(top_5)
+        print(f"aw goal {i + 1} assisted by {aw_pl_ass[1]}")
+
+def scorers(hm_gls, aw_gls, hm_data_1, aw_data_1):
+    print()
+    print("Calculating scorers.....")
+    print() 
+    
+    new_list = []
+    for item in hm_data_1:
+        item = list(item)
+        if item[5] == 'MID':
+            item.append(item[17] + 15)
+            new_list.append(item)
+        elif item[5] == 'ATT':
+            item.append(item[17] + 30)
+            new_list.append(item)
+        else:
+            item.append(item[17] + 0)
+            new_list.append(item)    
+
+    sort_hm_data_1 = sorted(new_list, key=lambda x: x[18], reverse=True)   
+    top_5 = [player for player in sort_hm_data_1[:5] if player[5] != 'GK']
+    for i in range(hm_gls):
+        hm_pl_ass = random.choice(top_5)
+        print(f"hm goal {i + 1} scored by {hm_pl_ass[1]}")
+
+    new_list = []
+    for item in aw_data_1:
+        item = list(item)
+        if item[5] == 'MID':
+            item.append(item[17] + 15)
+            new_list.append(item)
+        elif item[5] == 'ATT':
+            item.append(item[17] + 30)
+            new_list.append(item)
+        else:
+            item.append(item[17] + 0)
+            new_list.append(item)    
+
+    sort_aw_data_1 = sorted(new_list, key=lambda x: x[18], reverse=True)
+    top_5 = [player for player in sort_aw_data_1[:5] if player[5] != 'GK']
+    for i in range(aw_gls):
+        aw_pl_ass = random.choice(top_5)
+        print(f"aw goal {i + 1} scored by {aw_pl_ass[1]}")
