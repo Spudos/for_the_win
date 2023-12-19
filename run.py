@@ -75,12 +75,9 @@ def main():
     # calculate how many gls are scored
     hm_gls, aw_gls = match_calc.calc_gls(hm_on_tar, aw_on_tar, hm_def_cnt, hm_att_cnt, aw_att_cnt, aw_def_cnt)
     
-    # calculate who made assists
-    match_calc.assists(hm_gls, aw_gls, hm_data_1, aw_data_1)
+    # calculate who made and scored goals
+    match_calc.goals(hm_gls, aw_gls, hm_data_1, aw_data_1)
 
-    # calculate who scored
-    match_calc.scorers(hm_gls, aw_gls, hm_data_1, aw_data_1)
-    
     # calculate motm for each team
     hm_motm, aw_motm = match_calc.motm(hm_data_1, aw_data_1)
 
