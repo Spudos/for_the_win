@@ -55,4 +55,11 @@ def calc_on_player_random_perf(data):
 
     return data
 
+def run_player_adj(hm,aw):
+    hm_data = calc_on_player_fitness(hm)
+    hm_data_1 = calc_on_player_random_perf(hm_data)
 
+    aw_data = calc_on_player_fitness(aw)
+    aw_data_1 = calc_on_player_random_perf(aw_data)
+
+    return hm_data_1, aw_data_1

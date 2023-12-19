@@ -129,3 +129,23 @@ def goals(hm_gls, aw_gls, hm_data_1, aw_data_1):
         goal_list.append(goal_info)
 
     return goal_list
+
+def run_match(hm_mid_cnt, aw_mid_cnt, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt, hm_data_1, aw_data_1):
+    hm_cha, aw_cha = calc_cha(hm_mid_cnt, aw_mid_cnt)
+
+    # claculate how many cha are on tar
+    hm_on_tar, aw_on_tar = calc_on_tar(hm_cha, aw_cha, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt)
+
+    # calculate the possesion stats
+    hm_poss, aw_poss = calc_poss(hm_cha, aw_cha)
+
+    # calculate how many gls are scored
+    hm_gls, aw_gls = calc_gls(hm_on_tar, aw_on_tar, hm_def_cnt, hm_att_cnt, aw_att_cnt, aw_def_cnt)
+    
+    # calculate who made and scored goals
+    goal_list = goals(hm_gls, aw_gls, hm_data_1, aw_data_1)
+
+    # calculate motm for each team
+    hm_motm, aw_motm = motm(hm_data_1, aw_data_1)
+
+    return hm_cha, aw_cha, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls, hm_motm, aw_motm, goal_list 
