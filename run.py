@@ -33,11 +33,11 @@ def text_file_match_output(hm_abbr, aw_abbr, hm_data_1, aw_data_1, hm_def_cnt, h
     with open(file_name, "w") as file:
         file.write(f"hm team abbr: {hm_abbr}\n")
         for item in hm_data_1:
-            file.write(f"Pos: {item[5]} - Player: {item[1]} - TS: {item[20]} - Perf: {item[21]}\n")
+            file.write(f"Pos: {item[5]} - Player: {item[1]} - TS: {item[21]} - Perf: {item[22]}\n")
         file.write(f" \n")
         file.write(f"aw team abbr: {aw_abbr}\n")
         for item in aw_data_1:
-            file.write(f"Pos: {item[5]} - Player: {item[1]} - TS: {item[20]} - Perf: {item[21]}\n")
+            file.write(f"Pos: {item[5]} - Player: {item[1]} - TS: {item[21]} - Perf: {item[22]}\n")
         file.write(f" \n")        
         file.write(f"Defense - hm: {hm_def_cnt} aw: {aw_def_cnt}\n")
         file.write(f"Midfield - hm: {hm_mid_cnt} aw: {aw_mid_cnt}\n") 
