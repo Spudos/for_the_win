@@ -1,8 +1,8 @@
 import random
 
-def calc_chances(mid_cnt_hm, mid_cnt_aw):
+def calc_cha(mid_cnt_hm, mid_cnt_aw):
     print()
-    print("Calculating the number of chances for each team.....")
+    print("Calculating the number of cha for each team.....")
     print()
 
     hm_mid = mid_cnt_hm
@@ -11,23 +11,23 @@ def calc_chances(mid_cnt_hm, mid_cnt_aw):
     hm_random = random.randint(-5, 5)
     aw_random = random.randint(-5, 5)
     
-    hm_chances = int((hm_mid / (hm_mid + aw_mid)) * 30) + hm_random
-    aw_chances = int((aw_mid / (hm_mid + aw_mid)) * 30) + aw_random
+    hm_cha = int((hm_mid / (hm_mid + aw_mid)) * 30) + hm_random
+    aw_cha = int((aw_mid / (hm_mid + aw_mid)) * 30) + aw_random
 
     print()
-    print("Team chances calculated")
-    print(f"hm chances: ", hm_chances, " aw chances: ", aw_chances)
+    print("Team cha calculated")
+    print(f"hm cha: ", hm_cha, " aw cha: ", aw_cha)
     print()
 
-    return hm_chances, aw_chances
+    return hm_cha, aw_cha
 
-def calc_on_tar(hm_chances, aw_chances, att_cnt_hm, def_cnt_hm, att_cnt_aw, def_cnt_aw):
+def calc_on_tar(hm_cha, aw_cha, att_cnt_hm, def_cnt_hm, att_cnt_aw, def_cnt_aw):
     print()
     print("Calculating the number of on tar for each team.....")
     print()
     
-    hm_on_tar = int(hm_chances  * 0.75 * (att_cnt_hm / def_cnt_aw))
-    aw_on_tar = int(aw_chances  * 0.75 * (att_cnt_aw / def_cnt_hm))
+    hm_on_tar = int(hm_cha  * 0.75 * (att_cnt_hm / def_cnt_aw))
+    aw_on_tar = int(aw_cha  * 0.75 * (att_cnt_aw / def_cnt_hm))
     
     print()
     print("On tar calculated")
@@ -36,7 +36,7 @@ def calc_on_tar(hm_chances, aw_chances, att_cnt_hm, def_cnt_hm, att_cnt_aw, def_
 
     return hm_on_tar, aw_on_tar
 
-def calc_poss(hm_chances, aw_chances):
+def calc_poss(hm_cha, aw_cha):
     print()
     print("Calculating poss for each team.....")
     print() 
@@ -45,7 +45,7 @@ def calc_poss(hm_chances, aw_chances):
     aw_poss = 0
 
     poss_random = random.randint(-10, 10)
-    hm_poss = (int(hm_chances / (aw_chances + hm_chances) * 100) + poss_random)
+    hm_poss = (int(hm_cha / (aw_cha + hm_cha) * 100) + poss_random)
 
     aw_poss = 100 - hm_poss
 
