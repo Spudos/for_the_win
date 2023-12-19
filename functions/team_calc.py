@@ -8,7 +8,7 @@ def calculate_team(data):
 
     # Iterate through the player data
     for record in data:
-        perf = record[21]
+        perf = record[22]
         pos = record[5]
      
         # Add the performance to the respective position counter
@@ -24,6 +24,5 @@ def calculate_team(data):
     print()
     print("Team values calculated")
     print("Defence: ", def_count, " Midfield: ", mid_count, " Attack: ", att_count)
-    print()
 
     return def_count, mid_count, att_count

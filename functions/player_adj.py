@@ -2,10 +2,6 @@ import random
 
 def calc_on_player_fitness(data):
     # Perform calculation on each stat and save the results
-    print()
-    print("Calculating fitness adjustment for players.....")
-    print()
-
     results = []
     for record in data:
         name = record[1]
@@ -39,16 +35,10 @@ def calc_on_player_fitness(data):
         
         # Save the calculated result
         results.append(record_with_perf)
-        
-        print(record_with_perf)
 
     return results
 
 def calc_on_player_random_perf(data):
-    # Perform calculation on each stat and save the results
-    print()
-    print("Calculating randomly adjusted perf for players.....")
-    print()
 
     for i, record in enumerate(data):
         name = record[1]
@@ -60,8 +50,8 @@ def calc_on_player_random_perf(data):
         # Save the adjusted performance value to the record
         record = record[:22] + (new_perf,)
         data[i] = record
-        
-        print(name, perf, " ---> ", new_perf)
+
+        print (f"player: {record[1]} pos: {record[5]} perf: {record[22]}")
 
     return data
 
