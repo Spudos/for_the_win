@@ -1,4 +1,5 @@
 import sqlite3
+import random
 
 def update_player_stats(goals_list, hm_data_1, aw_data_1):
     # Connect to the SQLite database
@@ -9,13 +10,13 @@ def update_player_stats(goals_list, hm_data_1, aw_data_1):
         # Update the played column by 1
         cursor.execute("UPDATE players SET played = played + 1 WHERE name = ?", (str(name[1]),))
         cursor.execute("UPDATE players SET perf = perf + ? WHERE name = ?", (name[22], str(name[1])))
-        cursor.execute("UPDATE players SET fit = fit - 5 WHERE name = ?",  (str(name[1]),))
+        cursor.execute("UPDATE players SET fit = fit - ? WHERE name = ?",  (random.randint(1, 10), str(name[1])))
 
     for name in aw_data_1:
         # Update the played column by 1
         cursor.execute("UPDATE players SET played = played + 1 WHERE name = ?", (str(name[1]),))
         cursor.execute("UPDATE players SET perf = perf + ? WHERE name = ?", (name[22], str(name[1])))
-        cursor.execute("UPDATE players SET fit = fit - 5 WHERE name = ?",  (str(name[1]),))
+        cursor.execute("UPDATE players SET fit = fit - ? WHERE name = ?",  (random.randint(1, 10), str(name[1])))
 
     # Iterate through the goals_list and update the player stats
     for goal in goals_list:
