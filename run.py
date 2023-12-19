@@ -60,8 +60,7 @@ def main():
     hm_data = player_adj.calc_on_player_fitness(hm)
     hm_data_1 = player_adj.calc_on_player_random_perf(hm_data)
     hm_def_cnt, hm_mid_cnt, hm_att_cnt = team_calc.calculate_team(hm_data_1)
-    print(hm_data_1)
-    
+
     # make player adj and calculate team values for the aw team
     aw_data = player_adj.calc_on_player_fitness(aw)
     aw_data_1 = player_adj.calc_on_player_random_perf(aw_data)
@@ -88,7 +87,7 @@ def main():
     # output match data to a text file
     text_file_match_output(hm_abbr, aw_abbr, hm_data_1, aw_data_1, hm_def_cnt, hm_mid_cnt, hm_att_cnt, aw_def_cnt, aw_mid_cnt, aw_att_cnt, hm_cha, aw_cha, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls, hm_motm, aw_motm, goal_list)
 
-    db_update.update_player_stats(goal_list)
+    db_update.update_player_stats(goal_list, hm_data_1, aw_data_1)
 
 main()
 
