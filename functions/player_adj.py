@@ -42,8 +42,6 @@ def calc_on_player_fitness(data):
         
         print(record_with_perf)
 
-        
-
     return results
 
 def calc_on_player_random_perf(data):
@@ -54,7 +52,7 @@ def calc_on_player_random_perf(data):
 
     for i, record in enumerate(data):
         name = record[1]
-        perf = int(record[22])
+        perf = int(record[21])
 
         random_adjustment = random.randint(-20, 20)
         new_perf = int(perf + random_adjustment)

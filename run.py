@@ -60,7 +60,7 @@ def main():
     hm_data = player_adj.calc_on_player_fitness(hm)
     hm_data_1 = player_adj.calc_on_player_random_perf(hm_data)
     hm_def_cnt, hm_mid_cnt, hm_att_cnt = team_calc.calculate_team(hm_data_1)
-
+    
     # make player adj and calculate team values for the aw team
     aw_data = player_adj.calc_on_player_fitness(aw)
     aw_data_1 = player_adj.calc_on_player_random_perf(aw_data)
