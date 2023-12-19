@@ -106,13 +106,22 @@ def generate_top_5(team_list, mid_adj, att_adj):
     return top_5
     
 def goals(hm_gls, aw_gls, hm_data_1, aw_data_1):
+    goal_list = []
+
     hm_ass = generate_top_5(hm_data_1, 30, 15)
     hm_scr = generate_top_5(hm_data_1, 15, 30)
 
     for i in range(hm_gls):
         hm_pl_ass = random.choice(hm_ass)
         hm_pl_gls = random.choice(hm_scr)
-        print(f"hm goal {i + 1} assisted by {hm_pl_ass[1]} and scored by {hm_pl_gls[1]}") 
+        print(f"hm goal {i + 1} assisted by {hm_pl_ass[1]} and scored by {hm_pl_gls[1]}")
+        goal_info = {
+            "goal_number": i + 1,
+            "team": "hm",
+            "assisted_by": hm_pl_ass[1],
+            "scored_by": hm_pl_gls[1]
+        }
+        goal_list.append(goal_info)
 
     aw_ass = generate_top_5(aw_data_1, 30, 15)
     aw_scr = generate_top_5(aw_data_1, 15, 30)
@@ -121,3 +130,12 @@ def goals(hm_gls, aw_gls, hm_data_1, aw_data_1):
         aw_pl_ass = random.choice(aw_ass)
         aw_pl_gls = random.choice(aw_scr)
         print(f"aw goal {i + 1} assisted by {aw_pl_ass[1]} and scored by {aw_pl_gls[1]}")
+        goal_info = {
+            "goal_number": i + 1,
+            "team": "aw",
+            "assisted_by": aw_pl_ass[1],
+            "scored_by": aw_pl_gls[1]
+        }
+        goal_list.append(goal_info)
+
+    return goal_list
