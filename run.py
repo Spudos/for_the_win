@@ -1,10 +1,11 @@
 from functions import import_team, player_adj, team_calc, match_calc, db_update, match_output, gsheet
 
 def main():
-    gsheet.get_players()
+    player_data = gsheet.get_players()
+    hm, hm_abbr = gsheet.select_team(player_data)
 
     # load the teams based on player selections
-    hm, aw, hm_abbr, aw_abbr = import_team.player_load()
+    aw, aw_abbr = import_team.player_load()
     
     # make player adj and calculate team values for the hm team
     hm_data_1, aw_data_1 = player_adj.run_player_adj(hm, aw)
