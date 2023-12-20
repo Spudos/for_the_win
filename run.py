@@ -2,9 +2,10 @@ from functions import player_adj, team_calc, match_calc, match_output, gsheet
 
 def main():
     player_data = gsheet.get_players()
-    
-    for player in player_data:
-        gsheet.player_print(player)
+    gsheet.print_gk(player_data)
+    gsheet.print_def(player_data)
+    gsheet.print_mid(player_data)
+    gsheet.print_att(player_data)
 
     hm, hm_abbr,aw ,aw_abbr = gsheet.select_team(player_data)
     

@@ -77,26 +77,30 @@ def get_players():
 
     return player_data
 
-def player_print(player):
+def print_gk(player):
+    print("Goalkeepers------------------------------")
+    for player in player:
+        if player['pos'] == "GK":
+            print(f"Id: {player['id']}, {player['name']}, {player['ts']} skill")
+   
+def print_def(player):   
+    print("Defenders--------------------------------")
+    for player in player:
+        if player['pos'] == "DEF":
+            print(f"Id: {player['id']}, {player['name']}, {player['ts']} skill")
+    
+def print_mid(player):    
+    print("Midfielders-------------------------------")
+    for player in player:    
+        if player['pos'] == "MID":
+            print(f"Id: {player['id']}, {player['name']}, {player['ts']} skill")
+    
+def print_att(player):    
+    print("Attackers---------------------------------")
+    for player in player:    
+        if player['pos'] == "ATT":
+            print(f"Id: {player['id']}, {player['name']}, {player['ts']} skill")
 
-    position_order = {
-        'GK': 1,
-        'DEF': 2,
-        'MID': 3,
-        'ATT': 4
-    }
-
-    position_value = position_order.get(player['pos'], 5)
-
-
-    if position_value == 1:
-        print(f"Id: {player['id']}, {player['name']}, {player['pos']} {player['ts']} skill")
-    elif position_value == 2:
-        print(f"Id: {player['id']}, {player['name']}, {player['pos']} {player['ts']} skill")
-    elif position_value == 3:
-        print(f"Id: {player['id']}, {player['name']}, {player['pos']} {player['ts']} skill")
-    elif position_value == 4:
-        print(f"Id: {player['id']}, {player['name']}, {player['pos']} {player['ts']} skill")
   
 def select_team(player_data):
     hm = []
