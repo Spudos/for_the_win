@@ -1,4 +1,8 @@
 def calculate_team(data):
+    print()
+    print()
+    print("team_calc")
+    print(data)
     # Initialize position counters
     def_count = 0
     mid_count = 0
@@ -6,18 +10,18 @@ def calculate_team(data):
 
     # Iterate through the player data
     for record in data:
-        perf = record[22]
-        pos = record[5]
+        adj_perf = record['adj_perf']
+        pos = record['pos']
      
         # Add the performance to the respective position counter
         if pos == "GK":
-            def_count += perf
+            def_count += adj_perf
         elif pos == "DEF":
-            def_count += perf       
+            def_count += adj_perf       
         elif pos == "MID":
-            mid_count += perf
+            mid_count += adj_perf
         elif pos == "ATT":
-            att_count += perf
+            att_count += adj_perf
     
     print()
     print("Team values calculated")

@@ -14,27 +14,17 @@ def calc_on_player_fitness(data):
         else:
             perf = int(((record['co'] + record['ru'] + record['sh'] + record['fl'] + record['st']) + (record['pa'] + record['tk'] + record['he'] + record['cr']) / 2) * fit / 100)
         
-        record['perf'] = perf  # Update the 'perf' field in the original data list
-    print(data)
-    return data  # Return the updated data
+        record['perf'] = perf
+
+    return data
 
 
 def calc_on_player_random_perf(data):
-
-    for i, record in enumerate(data):
-        name = record[1]
-        perf = int(record[21])
-
+    
+    for i in data:
+        perf = i['perf']
         random_adjustment = random.randint(-20, 20)
-        new_perf = int(perf + random_adjustment)
-
-        # Save the adjusted performance value to the record
-        record = record[:22] + (new_perf,)
-        data[i] = record
-
-        print (f"player: {record[1]} pos: {record[5]} perf: {record[22]} ")
-
-    print()
+        i['adj_perf'] = int(perf + random_adjustment)
     
     return data
 

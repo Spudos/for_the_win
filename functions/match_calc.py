@@ -57,41 +57,42 @@ def calc_gls(hm_on_tar, aw_on_tar, hm_def_cnt, hm_att_cnt, aw_def_cnt, aw_att_cn
 
 def motm(hm_data_1, aw_data_1):
     
-    hm_motm = max(hm_data_1, key=lambda x: x[22])
-    aw_motm = max(aw_data_1, key=lambda x: x[22])
+    hm_motm = max(hm_data_1, key=lambda x: x['adj_perf'])
+    aw_motm = max(aw_data_1, key=lambda x: x['adj_perf'])
 
     print()
     print("motm calculated")
-    print(f"hm motm: {hm_motm[1]}  - perf {hm_motm[22]}  aw motm: {aw_motm[1]} - perf {aw_motm[22]}")
+    print(f"hm motm: {hm_motm['name']}  - perf {hm_motm['adj_perf']}  aw motm: {aw_motm['name']} - perf {aw_motm['adj_perf']}")
 
     return hm_motm, aw_motm
 
 def generate_top_5(team_list, mid_adj, att_adj):    
     new_list = []
     for item in team_list:
-        item = list(item)
-        if item[5] == 'MID':
-            item.append(item[22] + mid_adj)
+        if item['pos'] == 'MID':
+            item['top_5'] = item['perf'] + mid_adj
             new_list.append(item)
-        elif item[5] == 'ATT':
-            item.append(item[22] + att_adj)
+        elif item['pos'] == 'ATT':
+            item['top_5'] = item['perf'] + att_adj
             new_list.append(item)
         else:
-            item.append(item[22] + 0)
+            item['top_5'] = item['perf']
             new_list.append(item)    
 
-    sort_hm_data_1 = sorted(new_list, key=lambda x: x[23], reverse=True)   
-    top_5 = [player for player in sort_hm_data_1[:5] if player[5] != 'GK']
+    sort_team_list = sorted(new_list, key=lambda x: x['top_5'], reverse=True)   
+    top_5 = [player for player in sort_team_list if player['pos'] != 'GK']
     
     return top_5
+
     
-def generate_goal_info(player_assist, player_score, team):
+def generate_goal_info(player_assist, player_score, team_name):
     goal_info = {
-        "team": team,
-        "assisted_by": player_assist[1],
-        "scored_by": player_score[1]
+        "scored_by": player_score['name'],  # Access the player's name using the key 'name'
+        "assisted_by": player_assist['name'],  # Access the player's name using the key 'name'
+        "team": team_name
     }
     return goal_info
+
 
 def generate_goals(team_gls, team_data, team_name):
     goal_list = []
@@ -103,14 +104,15 @@ def generate_goals(team_gls, team_data, team_name):
         pl_gls = random.choice(team_scr)
 
         # Check if the scorer is the same as the assister
-        while pl_gls[1] == pl_ass[1]:
+        while pl_gls['name'] == pl_ass['name']:  # Access the player's name using the key 'name'
             pl_gls = random.choice(team_scr)
 
-        print(f"{team_name} goal {i + 1} assisted by {pl_ass[1]} and scored by {pl_gls[1]}")
+        print(f"{team_name} goal {i + 1} assisted by {pl_ass['name']} and scored by {pl_gls['name']}")
         goal_info = generate_goal_info(pl_ass, pl_gls, team_name)
         goal_list.append(goal_info)
 
     return goal_list
+
 
 def goals(hm_gls, aw_gls, hm_data_1, aw_data_1):
     hm_goals = generate_goals(hm_gls, hm_data_1, "hm")

@@ -1,4 +1,4 @@
-from functions import import_team, player_adj, team_calc, match_calc, db_update, match_output, gsheet
+from functions import player_adj, team_calc, match_calc, match_output, gsheet
 
 def main():
     player_data = gsheet.get_players()
