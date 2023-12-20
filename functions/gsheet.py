@@ -7,6 +7,42 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive"
 ]
 
+def get_aw():
+    CREDS = Credentials.from_service_account_file('creds.json')
+    SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+    GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+    SHEET = GSPREAD_CLIENT.open('for_the_win')
+
+    players_worksheet = SHEET.worksheet('players')
+
+    aw = []
+    for row in players_worksheet.get_all_records():
+        if row.get('id') != '' and row.get('club') == 'ALV':
+            player = {
+                "id": row.get('id'),
+                "name": row.get('name'),
+                "pos": row.get('pos'),
+                "pa": row.get('pa'),
+                "co": row.get('co'),
+                "tk": row.get('tk'),
+                "ru": row.get('ru'),
+                "sh": row.get('sh'),
+                "he": row.get('he'),
+                "fl": row.get('fl'),
+                "st": row.get('st'),
+                "cr": row.get('cr'),
+                "ts": row.get('ts'),
+                "fit": row.get('fit'),
+                "perf": row.get('perf'),
+                "adj_perf": row.get('adj_perf')
+            }
+            print(player)
+            aw.append(player)
+
+    aw_abbr = "awy"
+
+    return aw, aw_abbr
+
 def get_players():
     CREDS = Credentials.from_service_account_file('creds.json')
     SCOPED_CREDS = CREDS.with_scopes(SCOPE)
@@ -22,9 +58,19 @@ def get_players():
                 "id": row.get('id'),
                 "name": row.get('name'),
                 "pos": row.get('pos'),
+                "pa": row.get('pa'),
+                "co": row.get('co'),
+                "tk": row.get('tk'),
+                "ru": row.get('ru'),
+                "sh": row.get('sh'),
+                "he": row.get('he'),
+                "fl": row.get('fl'),
+                "st": row.get('st'),
+                "cr": row.get('cr'),
                 "ts": row.get('ts'),
                 "fit": row.get('fit'),
-                "av_perf": row.get('av_perf')
+                "perf": row.get('perf'),
+                "adj_perf": row.get('adj_perf')
             }
             print(player)
             player_data.append(player)
@@ -41,4 +87,8 @@ def select_team(player_data):
 
     hm_abbr = "usr"
 
-    return hm, hm_abbr
+    aw, aw_abbr = get_aw()
+
+    return hm, hm_abbr, aw, aw_abbr
+
+
