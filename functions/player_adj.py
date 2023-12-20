@@ -25,17 +25,17 @@ def calc_on_player_fitness(data):
         elif pos == "DEF":
             perf = int(((co + tk + ru + he + st) + (pa + sh + fl + cr)/2) * fit / 100)            
         elif pos == "MID":
-            perf = int(((pa + co + ru + fl + cr)  + (tk + sh + he + st)/2)* fit / 100) 
+            perf = int(((pa + co + ru + fl + cr)  + (tk + sh + he + st)/2) * fit / 100) 
         else:
-            perf = int(((co + ru + sh + fl + st)  + (pa + tk + he + cr)/2)* fit / 100)
+            perf = int(((co + ru + sh + fl + st)  + (pa + tk + he + cr)/2) * fit / 100)
 
-        ts = co + ru + sh + fl + st  + pa + tk + he + cr
+        ts =  co * 2 + ru * 2 + sh + fl + st * 2 + pa * 2 + tk + he + cr * 2
         
-        record_with_perf = record + (ts,) + (perf,)
+        record_with_perf = record + (perf,)
         
         # Save the calculated result
         results.append(record_with_perf)
-
+        
     return results
 
 def calc_on_player_random_perf(data):
@@ -51,7 +51,7 @@ def calc_on_player_random_perf(data):
         record = record[:22] + (new_perf,)
         data[i] = record
 
-        print (f"player: {record[1]} pos: {record[5]} perf: {record[22]}")
+        print (f"player: {record[1]} pos: {record[5]} perf: {record[22]} ")
 
     print()
     

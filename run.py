@@ -1,7 +1,8 @@
-from functions import import_team, player_adj, team_calc, match_calc, db_update, match_output
-import os, sqlite3
+from functions import import_team, player_adj, team_calc, match_calc, db_update, match_output, gsheet
 
 def main():
+    gsheet.get_players()
+
     # load the teams based on player selections
     hm, aw, hm_abbr, aw_abbr = import_team.player_load()
     
