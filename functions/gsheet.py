@@ -17,7 +17,7 @@ def get_aw():
 
     aw = []
     for row in players_worksheet.get_all_records():
-        if row.get('id') != '' and row.get('club') == 'ALV':
+        if row.get('id') != '' and row.get('club') == 'LIV':
             player = {
                 "id": row.get('id'),
                 "name": row.get('name'),
@@ -72,10 +72,32 @@ def get_players():
                 "perf": row.get('perf'),
                 "adj_perf": row.get('adj_perf')
             }
-            print(player)
+
             player_data.append(player)
+
     return player_data
-    
+
+def player_print(player):
+
+    position_order = {
+        'GK': 1,
+        'DEF': 2,
+        'MID': 3,
+        'ATT': 4
+    }
+
+    position_value = position_order.get(player['pos'], 5)
+
+
+    if position_value == 1:
+        print(f"Id: {player['id']}, {player['name']}, {player['pos']} {player['ts']} skill")
+    elif position_value == 2:
+        print(f"Id: {player['id']}, {player['name']}, {player['pos']} {player['ts']} skill")
+    elif position_value == 3:
+        print(f"Id: {player['id']}, {player['name']}, {player['pos']} {player['ts']} skill")
+    elif position_value == 4:
+        print(f"Id: {player['id']}, {player['name']}, {player['pos']} {player['ts']} skill")
+  
 def select_team(player_data):
     hm = []
     for i in range(1, 12):
