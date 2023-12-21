@@ -12,9 +12,9 @@ SCOPE = [
 # General functions ----------------------------------------------------------
 
 def clear_terminal():
-    if os.name == 'posix':  # For Unix/Linux/Mac systems
+    if os.name == 'posix':
         os.system('clear')
-    elif os.name == 'nt':  # For Windows systems
+    elif os.name == 'nt':
         os.system('cls')
 
 def press_any_key_to_continue():
@@ -24,7 +24,7 @@ def press_any_key_for_outcome():
     input(Fore.BLUE + "Press any key to see the match result..." + Style.RESET_ALL)
 
 def print_centered(text):
-    terminal_width = 80  # Adjust this value based on your terminal width
+    terminal_width = 80
     centered_text = text.center(terminal_width)
     print(centered_text)
 
@@ -214,7 +214,7 @@ def select_team(player_data):
     print("ID of a player to put him in the team.")
     print(Fore.RED + "------------------------------------------" + Style.RESET_ALL)
     hm = []
-    selected_ids = set()  # To keep track of selected player IDs
+    selected_ids = set()
     for i in range(1, 12):
         while True:
             try:
@@ -264,7 +264,6 @@ def print_away_team():
 # Perform player adjustments----------------------------------------------------------------
 
 def calc_on_player_fitness(data):
-    # Perform calculation on each stat and update the 'perf' field in the original data list
     for record in data:
         pos = record['pos']
         fit = record['fit']
@@ -313,17 +312,14 @@ def calculate_team(data, name):
         formatted_name = f"{name:<20}"
         print(f"{formatted_name} {i['pos']} {i['adj_perf']}")
 
-    # Initialize position counters
     def_count = 0
     mid_count = 0
     att_count = 0
 
-    # Iterate through the player data
     for record in data:
         adj_perf = record['adj_perf']
         pos = record['pos']
      
-        # Add the performance to the respective position counter
         if pos == "GK":
             def_count += adj_perf
         elif pos == "DEF":
@@ -432,8 +428,8 @@ def generate_top_5(team_list, mid_adj, att_adj):
 def generate_goal_info(player_assist, player_score, team_name):
     goal_info = {
         "team": team_name,
-        "scored_by": player_score['name'],  # Access the player's name using the key 'name'
-        "assisted_by": player_assist['name']  # Access the player's name using the key 'name'
+        "scored_by": player_score['name'],
+        "assisted_by": player_assist['name']
     }
     return goal_info
 
@@ -447,8 +443,7 @@ def generate_goals(team_gls, team_data, team_name):
         pl_ass = random.choice(team_ass)
         pl_gls = random.choice(team_scr)
 
-        # Check if the scorer is the same as the assister
-        while pl_gls['name'] == pl_ass['name']:  # Access the player's name using the key 'name'
+        while pl_gls['name'] == pl_ass['name']:
             pl_gls = random.choice(team_scr)
 
         print(f"{team_name} goal {i + 1} assisted by {pl_ass['name']} and scored by {pl_gls['name']}")
