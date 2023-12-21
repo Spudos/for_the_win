@@ -107,7 +107,7 @@ def print_instructions():
     print the instructions for the game
     """
     print()
-    print_centered(Fore.RED + '=' * 70 + ' v1.75' + Style.RESET_ALL)
+    print_centered(Fore.RED + '=' * 70 + ' v1.76' + Style.RESET_ALL)
     print_centered(Fore.GREEN + 'The football management game where you pick')
     print_centered('the team to take on the mighty Liverpool FC.')
     print()
@@ -163,7 +163,7 @@ def get_login_from_user():
                 print("Please enter both a username and password.")
         elif has_login_details == "n":
             new_username = input("Enter a new username:\n")
-            new_password = input("Enter a new password:\n")
+            new_password = input("Enter a new password (letters only):\n")
             add_user(new_username, new_password)
             print("Login details saved successfully!")
         else:
