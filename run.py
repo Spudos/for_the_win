@@ -1,6 +1,5 @@
 import gspread, random, os
 from google.oauth2.service_account import Credentials
-from datetime import datetime
 from colorama import Fore, Back, Style
 
 SCOPE = [
@@ -18,10 +17,10 @@ def clear_terminal():
         os.system('cls')
 
 def press_any_key_to_continue():
-    input(Fore.BLUE + "Press any key to continue..." + Style.RESET_ALL)
+    input(Fore.BLUE + "Press any key to continue...\n" + Style.RESET_ALL)
 
 def press_any_key_for_outcome():
-    input(Fore.BLUE + "Press any key to see the match result..." + Style.RESET_ALL)
+    input(Fore.BLUE + "Press any key to see the match result...\n" + Style.RESET_ALL)
 
 def print_centered(text):
     terminal_width = 80
@@ -218,7 +217,7 @@ def select_team(player_data):
     for i in range(1, 12):
         while True:
             try:
-                player_id = int(input(f"Player {i}: Select the ID of a player: "))
+                player_id = int(input(f"Player {i}: Select the ID of a player:\n"))
                 if player_id < 1 or player_id > len(player_data):
                     print("Invalid player ID. Please enter a valid ID.")
                 elif player_id in selected_ids:
