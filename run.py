@@ -20,6 +20,51 @@ def clear_terminal():
 def press_any_key_to_continue():
     input(Fore.BLUE + "Press any key to continue..." + Style.RESET_ALL)
 
+def print_for_the_win():
+    block_letters = {
+        'A': ['  **  ', ' *  * ', ' *****', '*    *', '*    *'],
+        'B': ['****  ', '*   * ', '***** ', '*    *', '****  '],
+        'C': [' **** ', '*    *', '*     ', '*    *', ' **** '],
+        'D': ['****  ', '*   * ', '*    *', '*   * ', '****  '],
+        'E': ['***** ', '*     ', '****  ', '*     ', '***** '],
+        'F': ['***** ', '*     ', '****  ', '*     ', '*     '],
+        'G': [' **** ', '*     ', '*  ***', '*    *', ' **** '],
+        'H': ['*    *', '*    *', '******', '*    *', '*    *'],
+        'I': ['***** ', '  *   ', '  *   ', '  *   ', '***** '],
+        'J': [' *****', '    * ', '    * ', '*   * ', ' ***  '],
+        'K': ['*   * ', '*  *  ', '***   ', '*  *  ', '*   * '],
+        'L': ['*     ', '*     ', '*     ', '*     ', '***** '],
+        'M': ['*    *', '**  **', '* ** *', '*    *', '*    *'],
+        'N': ['*    *', '**   *', '* *  *', '*  * *', '*   **'],
+        'O': [' **** ', '*    *', '*    *', '*    *', ' **** '],
+        'P': ['***** ', '*    *', '***** ', '*     ', '*     '],
+        'Q': [' **** ', '*    *', '*  * *', '*   **', ' **** '],
+        'R': ['***** ', '*    *', '****  ', '*   * ', '*    *'],
+        'S': [' **** ', '*     ', ' ***  ', '    * ', '****  '],
+        'T': ['***** ', '  *   ', '  *   ', '  *   ', '  *   '],
+        'U': ['*    *', '*    *', '*    *', '*    *', ' **** '],
+        'V': ['*    *', '*    *', ' *  * ', ' *  * ', '  **  '],
+        'W': ['*    *', '*    *', '* ** *', '**  **', '*    *'],
+        'X': ['*    *', ' *  * ', '  **  ', ' *  * ', '*    *'],
+        'Y': ['*    *', ' *  * ', '  **  ', '  *   ', '  *   '],
+        'Z': ['***** ', '   *  ', '  *   ', ' *    ', '***** '],
+        ' ': ['      ', '      ', '      ', '      ', '      '],
+    }
+
+    lines = ['', '', '', '', '']
+    text = 'for the win'
+    for char in text.upper():
+        if char in block_letters:
+            letter = block_letters[char]
+            for i in range(len(lines)):
+                lines[i] += f"{Fore.YELLOW}{letter[i]}{Style.RESET_ALL}" + ' ' * 1  # Add 1 spaces between letters
+        else:
+            for i in range(len(lines)):
+                lines[i] += ' ' * 7  # Add 7 spaces for unknown characters
+
+    for line in lines:
+        print(line)
+
 # Load Teams ----------------------------------------------------------------
 
 def get_aw():
@@ -389,6 +434,8 @@ def run_match(hm_mid_cnt, aw_mid_cnt, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def
 def main():
     clear_terminal()
 
+    print_for_the_win()
+
     # get player data from gsheet and print them to screen
     player_data = get_players()
     print_gk(player_data)
@@ -407,12 +454,12 @@ def main():
     # move to player and team calc phase
     press_any_key_to_continue()
     clear_terminal()
+    print(Fore.BLUE + "============== MATCH PLAYED =============="  + Style.RESET_ALL)
 
     # make player adj and calculate team values for the hm team
     hm_data_1, aw_data_1 = run_player_adj(hm, aw)
 
     # calculate team values for the teams
-    print(Fore.BLUE + "============== MATCH PLAYED =============="  + Style.RESET_ALL)
     hm_def_cnt, hm_mid_cnt, hm_att_cnt = calculate_team(hm_data_1, hm_abbr)
     aw_def_cnt, aw_mid_cnt, aw_att_cnt = calculate_team(aw_data_1, aw_abbr)
 
