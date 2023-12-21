@@ -20,6 +20,9 @@ def clear_terminal():
 def press_any_key_to_continue():
     input(Fore.BLUE + "Press any key to continue..." + Style.RESET_ALL)
 
+def press_any_key_for_outcome():
+    input(Fore.BLUE + "Press any key to see the match result..." + Style.RESET_ALL)
+
 def print_for_the_win():
     block_letters = {
         'A': ['  **  ', ' *  * ', ' *****', '*    *', '*    *'],
@@ -312,7 +315,7 @@ def calc_on_tar(hm_cha, aw_cha, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt):
     aw_on_tar = int(aw_cha  * 0.75 * (aw_att_cnt / hm_def_cnt))
     
     print()
-    print(Fore.GREEN + "Chances on target--------" + Style.RESET_ALL)
+    print(Fore.GREEN + "Chances on target--------------------------" + Style.RESET_ALL)
     print("Home: ", hm_on_tar, " Away: ", aw_on_tar)
 
     return hm_on_tar, aw_on_tar
@@ -328,18 +331,18 @@ def calc_poss(hm_cha, aw_cha):
     aw_poss = 100 - hm_poss
 
     print()
-    print(Fore.GREEN + "Possession--------------" + Style.RESET_ALL)
+    print(Fore.GREEN + "Possession--------------------------------" + Style.RESET_ALL)
     print("Home: ", hm_poss, " Away: ", aw_poss)
 
     return hm_poss, aw_poss
 
 def calc_gls(hm_on_tar, aw_on_tar, hm_def_cnt, hm_att_cnt, aw_def_cnt, aw_att_cnt):
-
+    press_any_key_for_outcome()
     hm_gls = int(((hm_att_cnt / aw_def_cnt) * 0.7 * hm_on_tar)/2)
     aw_gls = int(((aw_att_cnt / hm_def_cnt) * 0.7 * aw_on_tar)/2)
 
     print()
-    print(Fore.GREEN + "Goals scored-------------" + Style.RESET_ALL)
+    print(Fore.GREEN + "Goals scored------------------------------" + Style.RESET_ALL)
     print("Home: ", hm_gls, " Away: ", aw_gls)
 
     return hm_gls, aw_gls
@@ -350,10 +353,10 @@ def motm(hm_data_1, aw_data_1):
     aw_motm = max(aw_data_1, key=lambda x: x['adj_perf'])
 
     print()
-    print(Fore.GREEN + "Man of the Match-----------" + Style.RESET_ALL)
+    print(Fore.GREEN + "Man of the Match---------------------------" + Style.RESET_ALL)
     print(f"Home: {hm_motm['name']}  - perf {hm_motm['adj_perf']}  Away: {aw_motm['name']} - perf {aw_motm['adj_perf']}")
     print()
-    
+
     return hm_motm, aw_motm
 
 def generate_top_5(team_list, mid_adj, att_adj):    
@@ -417,18 +420,16 @@ def run_match(hm_mid_cnt, aw_mid_cnt, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def
     hm_on_tar, aw_on_tar = calc_on_tar(hm_cha, aw_cha, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt)
 
     # calculate the possesion stats
-    hm_poss, aw_poss = calc_poss(hm_cha, aw_cha)
+    calc_poss(hm_cha, aw_cha)
 
     # calculate how many gls are scored
     hm_gls, aw_gls = calc_gls(hm_on_tar, aw_on_tar, hm_def_cnt, hm_att_cnt, aw_att_cnt, aw_def_cnt)
     
     # calculate who made and scored goals
-    goal_list = goals(hm_gls, aw_gls, hm_data_1, aw_data_1)
+    goals(hm_gls, aw_gls, hm_data_1, aw_data_1)
 
     # calculate motm for each team
-    hm_motm, aw_motm = motm(hm_data_1, aw_data_1)
-
-    return hm_cha, aw_cha, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls, hm_motm, aw_motm, goal_list 
+    motm(hm_data_1, aw_data_1)
 
 # Run all functions================================================================
 
@@ -466,6 +467,6 @@ def main():
 
     # run the match
     press_any_key_to_continue()
-    hm_cha, aw_cha, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls, hm_motm, aw_motm, goal_list = run_match(hm_mid_cnt, aw_mid_cnt, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt, hm_data_1, aw_data_1)
+    run_match(hm_mid_cnt, aw_mid_cnt, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt, hm_data_1, aw_data_1)
 
 main()
