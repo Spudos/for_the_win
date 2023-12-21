@@ -301,8 +301,8 @@ def calc_cha(hm_mid_cnt, aw_mid_cnt):
     aw_cha = int((aw_mid / (hm_mid + aw_mid)) * 30) + aw_random
 
     print()
-    print("Team cha calculated")
-    print(f"hm cha: ", hm_cha, " aw cha: ", aw_cha)
+    print(Fore.GREEN + "Chances created----------" + Style.RESET_ALL)
+    print(f"Home: ", hm_cha, " Away: ", aw_cha)
 
     return hm_cha, aw_cha
 
@@ -312,8 +312,8 @@ def calc_on_tar(hm_cha, aw_cha, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt):
     aw_on_tar = int(aw_cha  * 0.75 * (aw_att_cnt / hm_def_cnt))
     
     print()
-    print("On tar calculated")
-    print("hm on tar: ", hm_on_tar, " aw on tar: ", aw_on_tar)
+    print(Fore.GREEN + "Chances on target--------" + Style.RESET_ALL)
+    print("Home: ", hm_on_tar, " Away: ", aw_on_tar)
 
     return hm_on_tar, aw_on_tar
 
@@ -328,8 +328,8 @@ def calc_poss(hm_cha, aw_cha):
     aw_poss = 100 - hm_poss
 
     print()
-    print("poss calculated")
-    print("hm poss: ", hm_poss, " aw poss: ", aw_poss)
+    print(Fore.GREEN + "Possession--------------" + Style.RESET_ALL)
+    print("Home: ", hm_poss, " Away: ", aw_poss)
 
     return hm_poss, aw_poss
 
@@ -339,8 +339,8 @@ def calc_gls(hm_on_tar, aw_on_tar, hm_def_cnt, hm_att_cnt, aw_def_cnt, aw_att_cn
     aw_gls = int(((aw_att_cnt / hm_def_cnt) * 0.7 * aw_on_tar)/2)
 
     print()
-    print("gls scored calculated")
-    print("hm gls: ", hm_gls, " aw gls: ", aw_gls)
+    print(Fore.GREEN + "Goals scored-------------" + Style.RESET_ALL)
+    print("Home: ", hm_gls, " Away: ", aw_gls)
 
     return hm_gls, aw_gls
 
@@ -350,9 +350,10 @@ def motm(hm_data_1, aw_data_1):
     aw_motm = max(aw_data_1, key=lambda x: x['adj_perf'])
 
     print()
-    print("motm calculated")
-    print(f"hm motm: {hm_motm['name']}  - perf {hm_motm['adj_perf']}  aw motm: {aw_motm['name']} - perf {aw_motm['adj_perf']}")
-
+    print(Fore.GREEN + "Man of the Match-----------" + Style.RESET_ALL)
+    print(f"Home: {hm_motm['name']}  - perf {hm_motm['adj_perf']}  Away: {aw_motm['name']} - perf {aw_motm['adj_perf']}")
+    print()
+    
     return hm_motm, aw_motm
 
 def generate_top_5(team_list, mid_adj, att_adj):    
@@ -376,9 +377,9 @@ def generate_top_5(team_list, mid_adj, att_adj):
     
 def generate_goal_info(player_assist, player_score, team_name):
     goal_info = {
+        "team": team_name,
         "scored_by": player_score['name'],  # Access the player's name using the key 'name'
-        "assisted_by": player_assist['name'],  # Access the player's name using the key 'name'
-        "team": team_name
+        "assisted_by": player_assist['name']  # Access the player's name using the key 'name'
     }
     return goal_info
 
