@@ -102,7 +102,7 @@ def print_for_the_win():
         print_centered(line)
 
     print()
-    print_centered(Fore.RED + '=' * 70 + ' v1.72' + Style.RESET_ALL)
+    print_centered(Fore.RED + '=' * 70 + ' v1.74' + Style.RESET_ALL)
     print_centered(Fore.GREEN + 'The football management game where you pick')
     print_centered('the team to take on the mighty Liverpool FC.')
     print()
