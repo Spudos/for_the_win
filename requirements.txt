@@ -8,7 +8,6 @@ google-auth==2.25.2
 google-auth-oauthlib==1.2.0
 gspread==5.12.2
 idna==3.6
-macholib @ file:///System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot11/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/python3/python3-141/macholib-1.15.2-py2.py3-none-any.whl
 oauthlib==3.2.2
 pyasn1==0.5.1
 pyasn1-modules==0.3.0
