@@ -107,7 +107,7 @@ def print_instructions():
     print the instructions for the game
     """
     print()
-    print_centered(Fore.RED + '=' * 70 + ' v1.76' + Style.RESET_ALL)
+    print_centered(Fore.RED + '=' * 70 + ' v1.77' + Style.RESET_ALL)
     print_centered(Fore.GREEN + 'The football management game where you pick')
     print_centered('the team to take on the mighty Liverpool FC.')
     print()
@@ -130,6 +130,11 @@ def print_instructions():
 
 
 def login(username, password):
+    """
+    gets the username and password from the
+    google sheet and returns true or false depending
+    on what the user has entered
+    """
     CREDS = Credentials.from_service_account_file('creds.json')
     SCOPED_CREDS = CREDS.with_scopes(SCOPE)
     GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
@@ -145,6 +150,11 @@ def login(username, password):
 
 
 def get_login_from_user():
+    """
+    asks if you have login details and if not allows
+    you to save some.  validates response and ensures
+    both are enetered on login
+    """
     while True:
         print()
         print_centered(Fore.RED + '=' * 79 + Style.RESET_ALL)
@@ -171,6 +181,9 @@ def get_login_from_user():
 
 
 def add_user(username, password):
+    """
+    saves the new user details in the sheet
+    """
     CREDS = Credentials.from_service_account_file('creds.json')
     SCOPED_CREDS = CREDS.with_scopes(SCOPE)
     GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
