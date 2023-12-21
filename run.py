@@ -168,7 +168,6 @@ def get_players():
 
 
 def print_gk(player):
-    print()
     print(Fore.RED + "=========== AVAILABLE PLAYERS ===========" + Style.RESET_ALL)
     print(Fore.RED + "Goalkeepers------------------------------" + Style.RESET_ALL)
     for player in player:
@@ -176,29 +175,24 @@ def print_gk(player):
             print(f"Id: {player['id']}, {player['name']}, {player['ts']} skill")
    
 def print_def(player): 
-    print()  
     print(Fore.RED + "Defenders--------------------------------" + Style.RESET_ALL)
     for player in player:
         if player['pos'] == "DEF":
             print(f"Id: {player['id']}, {player['name']}, {player['ts']} skill")
     
 def print_mid(player):    
-    print()
     print(Fore.RED + "Midfielders-------------------------------" + Style.RESET_ALL)
     for player in player:    
         if player['pos'] == "MID":
             print(f"Id: {player['id']}, {player['name']}, {player['ts']} skill")
     
-def print_att(player): 
-    print()   
+def print_att(player):    
     print(Fore.RED + "Attackers---------------------------------" + Style.RESET_ALL)
     for player in player:    
         if player['pos'] == "ATT":
             print(f"Id: {player['id']}, {player['name']}, {player['ts']} skill")
-    print(Fore.RED + "==========================================" + Style.RESET_ALL)
   
-def select_team(player_data):
-    print()   
+def select_team(player_data): 
     print(Fore.RED + "============= TEAM SELECTION =============" + Style.RESET_ALL)
     print("From the list of players above, select the")
     print("ID of a player to put him in the team.")
