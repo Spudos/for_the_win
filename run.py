@@ -447,8 +447,8 @@ def generate_goals(team_gls, team_data, team_name):
 
 
 def goals(hm_gls, aw_gls, hm_data_1, aw_data_1):
-    hm_goals = generate_goals(hm_gls, hm_data_1, "hm")
-    aw_goals = generate_goals(aw_gls, aw_data_1, "aw")
+    hm_goals = generate_goals(hm_gls, hm_data_1, "Home")
+    aw_goals = generate_goals(aw_gls, aw_data_1, "Away")
     return hm_goals + aw_goals
 
 
