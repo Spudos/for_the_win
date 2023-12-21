@@ -53,7 +53,7 @@ def get_aw():
             }
             aw.append(player)
 
-    aw_abbr = "awy"
+    aw_abbr = "Liverpool FC"
 
     return aw, aw_abbr
 
@@ -203,11 +203,17 @@ def run_player_adj(hm,aw):
 
 # Calculate team totals----------------------------------------------------------------
 
-def calculate_team(data):
+def calculate_team(data, name):
+    
     print()
-    print()
-    print("team_calc")
-    print(data)
+    print(Fore.RED + f"{name}"  + Style.RESET_ALL)
+    print(Fore.RED + "Performance ratings ----------------------"  + Style.RESET_ALL)
+    
+    for i in data:
+        name = i['name']
+        formatted_name = f"{name:<20}"
+        print(f"{formatted_name} {i['pos']} {i['adj_perf']}")
+
     # Initialize position counters
     def_count = 0
     mid_count = 0
@@ -229,15 +235,17 @@ def calculate_team(data):
             att_count += adj_perf
     
     print()
+    print(Fore.RED + "------------------------------------------" + Style.RESET_ALL)
     print("Team values calculated")
     print("Defence: ", def_count, " Midfield: ", mid_count, " Attack: ", att_count)
-
+    print(Fore.RED + "==========================================" + Style.RESET_ALL)
     return def_count, mid_count, att_count
 
 # Run the match----------------------------------------------------------------
 
 def calc_cha(hm_mid_cnt, aw_mid_cnt):
-
+    print()
+    print(Fore.BLUE + "============== MATCH STATS ==============="  + Style.RESET_ALL)
     hm_mid = hm_mid_cnt
     aw_mid = aw_mid_cnt
 
@@ -376,38 +384,6 @@ def run_match(hm_mid_cnt, aw_mid_cnt, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def
 
     return hm_cha, aw_cha, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls, hm_motm, aw_motm, goal_list 
 
-# Produce match output----------------------------------------------------------------
-
-def text_file_match_output(hm_abbr, aw_abbr, hm_data_1, aw_data_1, hm_def_cnt, hm_mid_cnt, hm_att_cnt, aw_def_cnt, aw_mid_cnt, aw_att_cnt, hm_cha, aw_cha, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls, hm_motm, aw_motm, goal_list):
-    
-    # Get the current date and time
-    current_datetime = datetime.now().strftime("%Y%m%d_%H%M")
-
-    # Construct the file name with the current date and time
-    file_name = f"match_reports/match_output_{hm_abbr}_v_{aw_abbr}_{current_datetime}.txt"
-    
-    with open(file_name, "w") as file:
-        file.write(f"hm team abbr: {hm_abbr}\n")
-        for item in hm_data_1:
-            file.write(f"Pos: {item['pos']} - Player: {item['name']} - TS: {item['ts']} - Perf: {item['adj_perf']}\n")
-        file.write(f" \n")
-        file.write(f"aw team abbr: {aw_abbr}\n")
-        for item in aw_data_1:
-            file.write(f"Pos: {item['pos']} - Player: {item['name']} - TS: {item['ts']} - Perf: {item['adj_perf']}\n")
-        file.write(f" \n")        
-        file.write(f"Defense - hm: {hm_def_cnt} aw: {aw_def_cnt}\n")
-        file.write(f"Midfield - hm: {hm_mid_cnt} aw: {aw_mid_cnt}\n") 
-        file.write(f"Attack - hm: {hm_att_cnt} aw: {aw_att_cnt}\n")       
-        file.write(f" \n")
-        file.write(f"poss - hm: {hm_poss} aw: {aw_poss}\n")        
-        file.write(f"cha - hm: {hm_cha} aw: {aw_cha}\n")
-        file.write(f"On tar - hm: {hm_on_tar} - aw: {aw_on_tar}\n")  
-        file.write(f"gls - hm: {hm_gls} - aw: {aw_gls}\n") 
-        for i in goal_list:
-            file.write(f"{i}\n") 
-        file.write(f" \n")
-        file.write(f"motm - hm: {hm_motm['name']} perf {hm_motm['adj_perf']} - aw: {aw_motm['name']} perf {aw_motm['adj_perf']}\n")
-
 # Run all functions================================================================
 
 def main():
@@ -436,13 +412,12 @@ def main():
     hm_data_1, aw_data_1 = run_player_adj(hm, aw)
 
     # calculate team values for the teams
-    hm_def_cnt, hm_mid_cnt, hm_att_cnt = calculate_team(hm_data_1)
-    aw_def_cnt, aw_mid_cnt, aw_att_cnt = calculate_team(aw_data_1)
+    print(Fore.BLUE + "============== MATCH PLAYED =============="  + Style.RESET_ALL)
+    hm_def_cnt, hm_mid_cnt, hm_att_cnt = calculate_team(hm_data_1, hm_abbr)
+    aw_def_cnt, aw_mid_cnt, aw_att_cnt = calculate_team(aw_data_1, aw_abbr)
 
     # run the match
+    press_any_key_to_continue()
     hm_cha, aw_cha, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls, hm_motm, aw_motm, goal_list = run_match(hm_mid_cnt, aw_mid_cnt, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt, hm_data_1, aw_data_1)
-
-    # output match data to a text file
-    text_file_match_output(hm_abbr, aw_abbr, hm_data_1, aw_data_1, hm_def_cnt, hm_mid_cnt, hm_att_cnt, aw_def_cnt, aw_mid_cnt, aw_att_cnt, hm_cha, aw_cha, hm_on_tar, aw_on_tar, hm_poss, aw_poss, hm_gls, aw_gls, hm_motm, aw_motm, goal_list)
 
 main()
