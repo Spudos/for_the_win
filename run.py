@@ -61,10 +61,6 @@ def print_for_the_win():
     }
 
     print()
-    print()
-    print()
-    print_centered(Fore.RED + '============================================================================' + Style.RESET_ALL)
-    print()
 
     lines = ['', '', '', '', '']
     text = 'for the win'
@@ -82,23 +78,18 @@ def print_for_the_win():
     
     print()
     print_centered(Fore.RED + '============================================================================' + Style.RESET_ALL)
-    print()
     print_centered(Fore.GREEN + 'The football management game where you pick the team to take on the mighty')
     print_centered('Liverpool FC.')
-    print()
     print()
     print_centered('In the team selection screen, you will be able to select 11 players from a')
     print_centered('list of those that are available.  Simply input the id for each player when')
     print_centered('and the match engine will calculate the outcome by using the comlex hidden')
     print_centered('stats for each player.')
-    print()
     print_centered('The only rules are that you cannot pick a player twice and you must pick')
     print_centered('11 players.  The formation will be determined based on what players you pick.')
-    print()
     print_centered('You will then be able to see the match stats and finally, the outcome of the')
     print_centered('game.')
-    print()
-    print_centered('Good luck, I hope you enjoy "For the Win!' + Style.RESET_ALL)
+    print_centered('Good luck, I hope you enjoy "For the Win!"' + Style.RESET_ALL)
     print()
     press_any_key_to_continue()
 
