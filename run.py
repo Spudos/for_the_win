@@ -90,7 +90,7 @@ def print_for_the_win():
     print_centered('You will then be able to see the match stats and finally, the outcome of the')
     print_centered('game.')
     print_centered('Good luck, I hope you enjoy "For the Win!"')
-    print_centered('V1.69' + Style.RESET_ALL)
+    print_centered('v1.70' + Style.RESET_ALL)
     print()
     press_any_key_to_continue()
 
