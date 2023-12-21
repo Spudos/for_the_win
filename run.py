@@ -211,41 +211,42 @@ def print_gk(player):
     """
     print all GKs
     """
-    print(Fore.RED + "=========== AVAILABLE PLAYERS ===========" + Style.RESET_ALL)
-    print(Fore.RED + "Goalkeepers------------------------------" + Style.RESET_ALL)
+    print(Fore.RED + "=========== AVAILABLE PLAYERS ===========" +
+          Style.RESET_ALL)
+    print(Fore.RED + "Goalkeepers" + '-' * 30 + Style.RESET_ALL)
     for player in player:
         if player['pos'] == "GK":
-            print(f"Id: {player['id']}, {player['name']}, {player['ts']} skill")
+            print(f"Id: {player['id']}, {player['name']}, {player['ts']} Skl")
 
 
 def print_def(player):
     """
     print all DEFs
     """
-    print(Fore.RED + "Defenders--------------------------------" + Style.RESET_ALL)
+    print(Fore.RED + "Defenders" + '-' * 32 + Style.RESET_ALL)
     for player in player:
         if player['pos'] == "DEF":
-            print(f"Id: {player['id']}, {player['name']}, {player['ts']} skill")
+            print(f"Id: {player['id']}, {player['name']}, {player['ts']} Skl")
 
 
 def print_mid(player):
     """
     print all MIDs
     """
-    print(Fore.RED + "Midfielders-------------------------------" + Style.RESET_ALL)
+    print(Fore.RED + "Midfielders" + '-' * 31 + Style.RESET_ALL)
     for player in player:
         if player['pos'] == "MID":
-            print(f"Id: {player['id']}, {player['name']}, {player['ts']} skill")
+            print(f"Id: {player['id']}, {player['name']}, {player['ts']} Skl")
 
 
 def print_att(player):
     """
     print all ATTs
     """
-    print(Fore.RED + "Attackers---------------------------------" + Style.RESET_ALL)
+    print(Fore.RED + "Attackers" + '-' * 33 + Style.RESET_ALL)
     for player in player:
         if player['pos'] == "ATT":
-            print(f"Id: {player['id']}, {player['name']}, {player['ts']} skill")
+            print(f"Id: {player['id']}, {player['name']}, {player['ts']} Skl")
 
 
 def select_team(player_data):
@@ -258,18 +259,19 @@ def select_team(player_data):
     is refreshed each time to utilise the terminal
     size
     """
-    print(Fore.RED + "============= TEAM SELECTION =============" + Style.RESET_ALL)
+    print(Fore.RED + "============= TEAM SELECTION =============" +
+          Style.RESET_ALL)
 
     hm = []
     selected_ids = set()
     for i in range(1, 12):
         while True:
             try:
-                player_id = int(input(f"Player {i}: Select the ID of a player:\n"))
+                player_id = int(input(f"Player {i}: Select an ID:\n"))
                 if player_id < 1 or player_id > len(player_data):
-                    print("Invalid player ID. Please enter a valid ID.")
+                    print("Invalid player ID.")
                 elif player_id in selected_ids:
-                    print("Player already selected. Please choose a different player.")
+                    print("Player already selected.")
                 else:
                     selected_ids.add(player_id)
                     break
@@ -285,7 +287,8 @@ def select_team(player_data):
         print_def(player_data)
         print_mid(player_data)
         print_att(player_data)
-        print(Fore.RED + "============= TEAM SELECTION =============" + Style.RESET_ALL)
+        print(Fore.RED + "============= TEAM SELECTION =============" +
+              Style.RESET_ALL)
 
     hm_abbr = "Your team"
 
@@ -337,13 +340,25 @@ def calc_on_player_fitness(data):
         pos = record['pos']
         fit = record['fit']
         if pos == "GK":
-            perf = int(((record['pa'] + record['co'] + record['sh'] + record['he'] + record['st']) + (record['tk'] + record['ru'] + record['fl'] + record['cr']) / 2) * fit / 100)
+            perf = int(((record['pa'] + record['co'] + record['sh']) +
+                        (record['he'] + record['st'] + record['tk']) +
+                        (record['ru'] + record['fl']) +
+                        (record['cr']) / 2) * fit / 100)
         elif pos == "DEF":
-            perf = int(((record['co'] + record['tk'] + record['ru'] + record['he'] + record['st']) + (record['pa'] + record['sh'] + record['fl'] + record['cr']) / 2) * fit / 100)
+            perf = int(((record['co'] + record['tk'] + record['ru']) +
+                        (record['he'] + record['st'] + record['pa']) +
+                        (record['sh'] + record['fl']) +
+                        (record['cr']) / 2) * fit / 100)
         elif pos == "MID":
-            perf = int(((record['pa'] + record['co'] + record['ru'] + record['fl'] + record['cr']) + (record['tk'] + record['sh'] + record['he'] + record['st']) / 2) * fit / 100)
+            perf = int(((record['pa'] + record['co'] + record['ru']) +
+                        (record['fl'] + record['cr']) + (record['tk']) +
+                        (record['sh'] + record['he']) +
+                        (record['st']) / 2) * fit / 100)
         else:
-            perf = int(((record['co'] + record['ru'] + record['sh'] + record['fl'] + record['st']) + (record['pa'] + record['tk'] + record['he'] + record['cr']) / 2) * fit / 100)
+            perf = int(((record['co'] + record['ru'] + record['sh']) +
+                        (record['fl'] + record['st']) + (record['pa']) +
+                        (record['tk'] + record['he']) +
+                        (record['cr']) / 2) * fit / 100)
 
         record['perf'] = perf
 
@@ -389,10 +404,12 @@ def calculate_team(data, name):
     this also lists the player performances which
     are the base values plus the random element
     """
-    print(Fore.BLUE + "============== MATCH PLAYED ==============" + Style.RESET_ALL)
+    print(Fore.BLUE + "============== MATCH PLAYED ==============" +
+          Style.RESET_ALL)
     print()
     print(Fore.RED + f"{name}" + Style.RESET_ALL)
-    print(Fore.RED + "Performance ratings ----------------------" + Style.RESET_ALL)
+    print(Fore.RED + "Performance ratings ----------------------" +
+          Style.RESET_ALL)
 
     for i in data:
         name = i['name']
@@ -417,10 +434,12 @@ def calculate_team(data, name):
             att_count += adj_perf
 
     print()
-    print(Fore.RED + "------------------------------------------" + Style.RESET_ALL)
+    print(Fore.RED + "------------------------------------------" +
+          Style.RESET_ALL)
     print("Team values calculated")
-    print("Defence: ", def_count, " Midfield: ", mid_count, " Attack: ", att_count)
-    print(Fore.RED + "==========================================" + Style.RESET_ALL)
+    print("Def: ", def_count, " Midf: ", mid_count, " Att: ", att_count)
+    print(Fore.RED + "==========================================" +
+          Style.RESET_ALL)
 
     press_any_key_to_continue()
     clear_terminal()
@@ -439,7 +458,8 @@ def calc_cha(hm_mid_cnt, aw_mid_cnt):
     is the added to both teams to keep it more unpredictable
     """
     print()
-    print(Fore.BLUE + "============== MATCH STATS ===============" + Style.RESET_ALL)
+    print(Fore.BLUE + "============== MATCH STATS ===============" +
+          Style.RESET_ALL)
     hm_mid = hm_mid_cnt
     aw_mid = aw_mid_cnt
 
@@ -450,13 +470,15 @@ def calc_cha(hm_mid_cnt, aw_mid_cnt):
     aw_cha = int((aw_mid / (hm_mid + aw_mid)) * 30) + aw_random
 
     print()
-    print(Fore.GREEN + "Chances created---------------------------" + Style.RESET_ALL)
+    print(Fore.GREEN + "Chances created---------------------------" +
+          Style.RESET_ALL)
     print(f"Home: ", hm_cha, " Away: ", aw_cha)
 
     return hm_cha, aw_cha
 
 
-def calc_on_tar(hm_cha, aw_cha, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt):
+def calc_on_tar(hm_cha, aw_cha, hm_att_cnt, hm_def_cnt,
+                aw_att_cnt, aw_def_cnt):
     """
     a teams att is compared to the oppositions def
     to decide how many of the chances are on target.
@@ -467,7 +489,8 @@ def calc_on_tar(hm_cha, aw_cha, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt):
     aw_on_tar = int(aw_cha * 0.75 * (aw_att_cnt / hm_def_cnt))
 
     print()
-    print(Fore.GREEN + "Chances on target-------------------------" + Style.RESET_ALL)
+    print(Fore.GREEN + "Chances on target-------------------------" +
+          Style.RESET_ALL)
     print("Home: ", hm_on_tar, " Away: ", aw_on_tar)
 
     return hm_on_tar, aw_on_tar
@@ -487,13 +510,15 @@ def calc_poss(hm_cha, aw_cha):
     aw_poss = 100 - hm_poss
 
     print()
-    print(Fore.GREEN + "Possession--------------------------------" + Style.RESET_ALL)
+    print(Fore.GREEN + "Possession--------------------------------" +
+          Style.RESET_ALL)
     print("Home: ", hm_poss, " Away: ", aw_poss)
 
     return hm_poss, aw_poss
 
 
-def calc_gls(hm_on_tar, aw_on_tar, hm_def_cnt, hm_att_cnt, aw_def_cnt, aw_att_cnt):
+def calc_gls(hm_on_tar, aw_on_tar, hm_def_cnt, hm_att_cnt,
+             aw_def_cnt, aw_att_cnt):
     """
     att v def is taken into account to decide
     how many of the on target chances are converted
@@ -506,7 +531,8 @@ def calc_gls(hm_on_tar, aw_on_tar, hm_def_cnt, hm_att_cnt, aw_def_cnt, aw_att_cn
     aw_gls = int(((aw_att_cnt / hm_def_cnt) * 0.7 * aw_on_tar)/2)
 
     print()
-    print(Fore.GREEN + "Goals scored------------------------------" + Style.RESET_ALL)
+    print(Fore.GREEN + "Goals scored------------------------------" +
+          Style.RESET_ALL)
     print("Home: ", hm_gls, " Away: ", aw_gls)
 
     return hm_gls, aw_gls
@@ -521,8 +547,11 @@ def motm(hm_data_1, aw_data_1):
     aw_motm = max(aw_data_1, key=lambda x: x['adj_perf'])
 
     print()
-    print(Fore.GREEN + "Man of the Match---------------------------" + Style.RESET_ALL)
-    print(f"Home: {hm_motm['name']}  - perf {hm_motm['adj_perf']}  Away: {aw_motm['name']} - perf {aw_motm['adj_perf']}")
+    print(Fore.GREEN + "Man of the Match---------------------------" +
+          Style.RESET_ALL)
+    print(f"Home: {hm_motm['name']} - perf {hm_motm['adj_perf']}"
+          f"  Away: {aw_motm['name']} - perf {aw_motm['adj_perf']}")
+
     print()
 
     return hm_motm, aw_motm
@@ -571,7 +600,7 @@ def generate_goal_info(player_assist, player_score, team_name):
 
 def generate_goals(team_gls, team_data, team_name):
     """
-    pass theinfo in the top_5 calculator the select
+    pass the info in the top_5 calculator the select
     a assist and scorer for every goal based on
     random selection from the 5 best players. one
     player cannot score and assist the same goal as
@@ -588,7 +617,8 @@ def generate_goals(team_gls, team_data, team_name):
         while pl_gls['name'] == pl_ass['name']:
             pl_gls = random.choice(team_scr)
 
-        print(f"{team_name} goal {i + 1} assisted by {pl_ass['name']} and scored by {pl_gls['name']}")
+        print(f"{team_name} goal {i + 1} assisted by {pl_ass['name']}"
+              f" and scored by {pl_gls['name']}")
         goal_info = generate_goal_info(pl_ass, pl_gls, team_name)
         goal_list.append(goal_info)
 
@@ -604,7 +634,8 @@ def goals(hm_gls, aw_gls, hm_data_1, aw_data_1):
     return hm_goals + aw_goals
 
 
-def run_match(hm_mid_cnt, aw_mid_cnt, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt, hm_data_1, aw_data_1):
+def run_match(hm_mid_cnt, aw_mid_cnt, hm_att_cnt, hm_def_cnt,
+              aw_att_cnt, aw_def_cnt, hm_data_1, aw_data_1):
     hm_cha, aw_cha = calc_cha(hm_mid_cnt, aw_mid_cnt)
     """
     summary function to run all of the match calc
@@ -614,13 +645,15 @@ def run_match(hm_mid_cnt, aw_mid_cnt, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def
     """
 
     # claculate how many cha are on tar
-    hm_on_tar, aw_on_tar = calc_on_tar(hm_cha, aw_cha, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt)
+    hm_on_tar, aw_on_tar = calc_on_tar(hm_cha, aw_cha, hm_att_cnt,
+                                       hm_def_cnt, aw_att_cnt, aw_def_cnt)
 
     # calculate the possesion stats
     calc_poss(hm_cha, aw_cha)
 
     # calculate how many gls are scored
-    hm_gls, aw_gls = calc_gls(hm_on_tar, aw_on_tar, hm_def_cnt, hm_att_cnt, aw_att_cnt, aw_def_cnt)
+    hm_gls, aw_gls = calc_gls(hm_on_tar, aw_on_tar, hm_def_cnt,
+                              hm_att_cnt, aw_att_cnt, aw_def_cnt)
 
     # calculate who made and scored goals
     goals(hm_gls, aw_gls, hm_data_1, aw_data_1)
@@ -668,7 +701,8 @@ def main():
     aw_def_cnt, aw_mid_cnt, aw_att_cnt = calculate_team(aw_data_1, aw_abbr)
 
     # run the match
-    run_match(hm_mid_cnt, aw_mid_cnt, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt, hm_data_1, aw_data_1)
+    run_match(hm_mid_cnt, aw_mid_cnt, hm_att_cnt, hm_def_cnt,
+              aw_att_cnt, aw_def_cnt, hm_data_1, aw_data_1)
 
 
 main()
