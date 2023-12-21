@@ -344,7 +344,7 @@ def calc_cha(hm_mid_cnt, aw_mid_cnt):
     aw_cha = int((aw_mid / (hm_mid + aw_mid)) * 30) + aw_random
 
     print()
-    print(Fore.GREEN + "Chances created----------" + Style.RESET_ALL)
+    print(Fore.GREEN + "Chances created---------------------------" + Style.RESET_ALL)
     print(f"Home: ", hm_cha, " Away: ", aw_cha)
 
     return hm_cha, aw_cha
@@ -355,7 +355,7 @@ def calc_on_tar(hm_cha, aw_cha, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt):
     aw_on_tar = int(aw_cha  * 0.75 * (aw_att_cnt / hm_def_cnt))
     
     print()
-    print(Fore.GREEN + "Chances on target--------------------------" + Style.RESET_ALL)
+    print(Fore.GREEN + "Chances on target-------------------------" + Style.RESET_ALL)
     print("Home: ", hm_on_tar, " Away: ", aw_on_tar)
 
     return hm_on_tar, aw_on_tar
