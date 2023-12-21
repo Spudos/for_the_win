@@ -11,18 +11,30 @@ SCOPE = [
 # General functions ----------------------------------------------------------
 
 def clear_terminal():
+    """
+    clear the terminal as required
+    """
     if os.name == 'posix':
         os.system('clear')
     elif os.name == 'nt':
         os.system('cls')
 
 def press_any_key_to_continue():
+    """
+    used to introduce a natural delay into the flow of the app
+    """
     input(Fore.BLUE + "Press any key to continue...\n" + Style.RESET_ALL)
 
 def press_any_key_for_outcome():
+    """
+    variation on the above but with different messaging
+    """
     input(Fore.BLUE + "Press any key to see the match result...\n" + Style.RESET_ALL)
 
 def print_centered(text):
+    """
+    center the text where used, primarily for the welcome string
+    """
     terminal_width = 80
     centered_text = text.center(terminal_width)
     print(centered_text)
@@ -30,6 +42,9 @@ def print_centered(text):
 # Header and instructions print ------------------------------------------------
 
 def print_for_the_win():
+    """
+    print the header and instructions for the game
+    """
     block_letters = {
         'A': ['  **  ', ' *  * ', ' *****', '*    *', '*    *'],
         'B': ['****  ', '*   * ', '***** ', '*    *', '****  '],
@@ -77,7 +92,7 @@ def print_for_the_win():
         print_centered(line)
     
     print()
-    print_centered(Fore.RED + '====================================================================== v1.71' + Style.RESET_ALL)
+    print_centered(Fore.RED + '====================================================================== v1.72' + Style.RESET_ALL)
     print_centered(Fore.GREEN + 'The football management game where you pick the team to take on the mighty')
     print_centered('Liverpool FC.')
     print()
@@ -98,6 +113,13 @@ def print_for_the_win():
 # Load Teams ----------------------------------------------------------------
 
 def get_aw():
+    """
+    access the gsheet and look for any rows where 
+    the player is LIV and the row is not blank.
+    set the aw variable as the team selected above
+    and ser the team name using aw_abbr
+    """
+        
     CREDS = Credentials.from_service_account_file('creds.json')
     SCOPED_CREDS = CREDS.with_scopes(SCOPE)
     GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
@@ -133,6 +155,11 @@ def get_aw():
     return aw, aw_abbr
 
 def get_players():
+    """
+    Look up players from the gsheet selecting 
+    all player who are not from club LIV and
+    where the row isnt blank
+    """
     CREDS = Credentials.from_service_account_file('creds.json')
     SCOPED_CREDS = CREDS.with_scopes(SCOPE)
     GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
@@ -168,31 +195,52 @@ def get_players():
 
 
 def print_gk(player):
+    """
+    print all GKs
+    """
     print(Fore.RED + "=========== AVAILABLE PLAYERS ===========" + Style.RESET_ALL)
     print(Fore.RED + "Goalkeepers------------------------------" + Style.RESET_ALL)
     for player in player:
         if player['pos'] == "GK":
             print(f"Id: {player['id']}, {player['name']}, {player['ts']} skill")
    
-def print_def(player): 
+def print_def(player):
+    """
+    print all DEFs
+    """ 
     print(Fore.RED + "Defenders--------------------------------" + Style.RESET_ALL)
     for player in player:
         if player['pos'] == "DEF":
             print(f"Id: {player['id']}, {player['name']}, {player['ts']} skill")
     
-def print_mid(player):    
+def print_mid(player): 
+    """
+    print all MIDs
+    """   
     print(Fore.RED + "Midfielders-------------------------------" + Style.RESET_ALL)
     for player in player:    
         if player['pos'] == "MID":
             print(f"Id: {player['id']}, {player['name']}, {player['ts']} skill")
     
 def print_att(player):    
+    """
+    print all ATTs
+    """
     print(Fore.RED + "Attackers---------------------------------" + Style.RESET_ALL)
     for player in player:    
         if player['pos'] == "ATT":
             print(f"Id: {player['id']}, {player['name']}, {player['ts']} skill")
   
-def select_team(player_data): 
+def select_team(player_data):
+    """
+    from the player_data selected in get_players()
+    give the user the chance to select what players
+    they want in their team.  includes validation
+    for only pisking a player once, only putting 
+    in valid ids and picking 11 players.  The view 
+    is refreshed each time to utilise the terminal 
+    size
+    """ 
     print(Fore.RED + "============= TEAM SELECTION =============" + Style.RESET_ALL)
     
     hm = []
@@ -228,6 +276,9 @@ def select_team(player_data):
 
 
 def print_team_selected(hm):
+    """
+    output the user selected team
+    """
     print() 
     print(Fore.YELLOW + "This is the team you selected ------------" )
     for player in hm:
@@ -237,6 +288,9 @@ def print_team_selected(hm):
     print("------------------------------------------" + Style.RESET_ALL)
 
 def print_away_team():
+    """
+    output the computer selected team
+    """
     aw, aw_abbr = get_aw()
 
     print() 
@@ -253,6 +307,13 @@ def print_away_team():
 # Perform player adjustments----------------------------------------------------------------
 
 def calc_on_player_fitness(data):
+    """
+    load individual player skills and calculate
+    a base performance figure based on what skills 
+    are most important for that position.  fitness
+    also taken into account but the program does
+    not adjust fitness.  this would be in V2
+    """
     for record in data:
         pos = record['pos']
         fit = record['fit']
@@ -271,7 +332,10 @@ def calc_on_player_fitness(data):
 
 
 def calc_on_player_random_perf(data):
-    
+    """
+    to add a random element to outcomes a 
+    players rating is adjusted by +/- 20
+    """
     for i in data:
         perf = i['perf']
         random_adjustment = random.randint(-20, 20)
@@ -280,6 +344,11 @@ def calc_on_player_random_perf(data):
     return data
 
 def run_player_adj(hm,aw):
+    """
+    Summary function to run the player calcs
+    above to that not everythign is included 
+    in the main function
+    """
     hm_data = calc_on_player_fitness(hm)
     hm_data_1 = calc_on_player_random_perf(hm_data)
     
@@ -291,6 +360,13 @@ def run_player_adj(hm,aw):
 # Calculate team totals----------------------------------------------------------------
 
 def calculate_team(data, name):
+    """
+    so that match calcs can be done the player
+    info is amalgamated into def/mid/att.  the 
+    two teams will use this to make comparisons.
+    this also lists the player performances which 
+    are the base values plus the random element
+    """
     print(Fore.BLUE + "============== MATCH PLAYED =============="  + Style.RESET_ALL)
     print()
     print(Fore.RED + f"{name}"  + Style.RESET_ALL)
@@ -332,6 +408,12 @@ def calculate_team(data, name):
 # Run the match----------------------------------------------------------------
 
 def calc_cha(hm_mid_cnt, aw_mid_cnt):
+    """
+    using the team values the mids are compared with 
+    the team with the highest mid creating more chances 
+    up to a maximum of 30.  a randomelement of +/- 5 
+    is the added to both teams to keep it more unpredictable
+    """
     print()
     print(Fore.BLUE + "============== MATCH STATS ==============="  + Style.RESET_ALL)
     hm_mid = hm_mid_cnt
@@ -350,7 +432,12 @@ def calc_cha(hm_mid_cnt, aw_mid_cnt):
     return hm_cha, aw_cha
 
 def calc_on_tar(hm_cha, aw_cha, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt):
-    
+    """
+    a teams att is compared to the oppositions def
+    to decide how many of the chances are on target.
+    the higher the difference the more chances a team
+    will get
+    """
     hm_on_tar = int(hm_cha  * 0.75 * (hm_att_cnt / aw_def_cnt))
     aw_on_tar = int(aw_cha  * 0.75 * (aw_att_cnt / hm_def_cnt))
     
@@ -361,7 +448,10 @@ def calc_on_tar(hm_cha, aw_cha, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt):
     return hm_on_tar, aw_on_tar
 
 def calc_poss(hm_cha, aw_cha):
-
+    """
+    possesion is calculated using the number of 
+    chances created and applying a +/- 10 value
+    """
     hm_poss = 0
     aw_poss = 0
 
@@ -377,6 +467,13 @@ def calc_poss(hm_cha, aw_cha):
     return hm_poss, aw_poss
 
 def calc_gls(hm_on_tar, aw_on_tar, hm_def_cnt, hm_att_cnt, aw_def_cnt, aw_att_cnt):
+    """
+    att v def is taken into account to decide
+    how many of the on target chances are converted 
+    into goals.  goals are adjusted by .7 then /2
+    after play testing revealed this is the best 
+    way to get realistic outcomes
+    """
     press_any_key_for_outcome()
     hm_gls = int(((hm_att_cnt / aw_def_cnt) * 0.7 * hm_on_tar)/2)
     aw_gls = int(((aw_att_cnt / hm_def_cnt) * 0.7 * aw_on_tar)/2)
@@ -388,7 +485,10 @@ def calc_gls(hm_on_tar, aw_on_tar, hm_def_cnt, hm_att_cnt, aw_def_cnt, aw_att_cn
     return hm_gls, aw_gls
 
 def motm(hm_data_1, aw_data_1):
-    
+    """
+    the player for each team with the highest 
+    perf is selected as motm
+    """
     hm_motm = max(hm_data_1, key=lambda x: x['adj_perf'])
     aw_motm = max(aw_data_1, key=lambda x: x['adj_perf'])
 
@@ -399,7 +499,17 @@ def motm(hm_data_1, aw_data_1):
 
     return hm_motm, aw_motm
 
-def generate_top_5(team_list, mid_adj, att_adj):    
+def generate_top_5(team_list, mid_adj, att_adj): 
+    """
+    to decide on assists and scorers the top 5 
+    performing players from each side are slected 
+    and put in a list.  GKs are excluded.  for 
+    assists there is an a big adjustment to perf
+    and for att a smaller adj and the reverse 
+    for goals.  this is to make mids more likely 
+    to be selected for assists and atts more 
+    likely to be selected for goals
+    """   
     new_list = []
     for item in team_list:
         if item['pos'] == 'MID':
@@ -419,6 +529,9 @@ def generate_top_5(team_list, mid_adj, att_adj):
 
     
 def generate_goal_info(player_assist, player_score, team_name):
+    """
+    output goal info
+    """
     goal_info = {
         "team": team_name,
         "scored_by": player_score['name'],
@@ -428,6 +541,13 @@ def generate_goal_info(player_assist, player_score, team_name):
 
 
 def generate_goals(team_gls, team_data, team_name):
+    """
+    pass theinfo in the top_5 calculator the select
+    a assist and scorer for every goal based on
+    random selection from the 5 best players. one
+    player cannot score and assist the same goal as
+    per the while loop
+    """
     goal_list = []
     team_ass = generate_top_5(team_data, 30, 15)
     team_scr = generate_top_5(team_data, 15, 30)
@@ -447,6 +567,9 @@ def generate_goals(team_gls, team_data, team_name):
 
 
 def goals(hm_gls, aw_gls, hm_data_1, aw_data_1):
+    """
+    pass the info into the goal info generator
+    """
     hm_goals = generate_goals(hm_gls, hm_data_1, "Home")
     aw_goals = generate_goals(aw_gls, aw_data_1, "Away")
     return hm_goals + aw_goals
@@ -454,6 +577,12 @@ def goals(hm_gls, aw_gls, hm_data_1, aw_data_1):
 
 def run_match(hm_mid_cnt, aw_mid_cnt, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt, hm_data_1, aw_data_1):
     hm_cha, aw_cha = calc_cha(hm_mid_cnt, aw_mid_cnt)
+    """
+    summary function to run all of the match calc
+    functions.  this mehtod makes it easier to 
+    see the distinct modules in the code without 
+    importing other files
+    """
 
     # claculate how many cha are on tar
     hm_on_tar, aw_on_tar = calc_on_tar(hm_cha, aw_cha, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt)
@@ -473,6 +602,9 @@ def run_match(hm_mid_cnt, aw_mid_cnt, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def
 # Run all functions================================================================
 
 def main():
+    """
+    run all functions required for the game
+    """
     clear_terminal()
 
     print_for_the_win()
