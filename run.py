@@ -77,7 +77,7 @@ def print_for_the_win():
         print_centered(line)
     
     print()
-    print_centered(Fore.RED + '============================================================================' + Style.RESET_ALL)
+    print_centered(Fore.RED + '====================================================================== v1.71' + Style.RESET_ALL)
     print_centered(Fore.GREEN + 'The football management game where you pick the team to take on the mighty')
     print_centered('Liverpool FC.')
     print()
@@ -89,8 +89,7 @@ def print_for_the_win():
     print_centered('11 players.  The formation will be determined based on what players you pick.')
     print_centered('You will then be able to see the match stats and finally, the outcome of the')
     print_centered('game.')
-    print_centered('Good luck, I hope you enjoy "For the Win!"')
-    print_centered('v1.70' + Style.RESET_ALL)
+    print_centered('Good luck, I hope you enjoy "For the Win!"'+ Style.RESET_ALL)
     print()
     press_any_key_to_continue()
 
