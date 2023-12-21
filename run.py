@@ -18,7 +18,7 @@ def clear_terminal():
         os.system('cls')
 
 def press_any_key_to_continue():
-    input("Press any key to continue...")
+    input(Fore.BLUE + "Press any key to continue..." + Style.RESET_ALL)
 
 # Load Teams ----------------------------------------------------------------
 
@@ -67,7 +67,7 @@ def get_players():
 
     player_data = []
     for row in players_worksheet.get_all_records():
-        if row.get('id') != '':
+        if row.get('id') != '' and row.get('club') != 'LIV':
             player = {
                 "id": row.get('id'),
                 "name": row.get('name'),
@@ -90,6 +90,7 @@ def get_players():
             player_data.append(player)
 
     return player_data
+
 
 def print_gk(player):
     print()
@@ -134,6 +135,11 @@ def select_team(player_data):
         hm.append(team)
         print(Fore.GREEN + f"{team['name']} : {team['pos']} : {team['ts']}" + Style.RESET_ALL)
     
+    hm_abbr = "Your team"
+
+    return hm, hm_abbr
+
+def print_team_selected(hm):
     print() 
     print(Fore.YELLOW + "This is the team you selected ------------" )
     for player in hm:
@@ -141,11 +147,19 @@ def select_team(player_data):
         formatted_name = f"{name:<20}"
         print(f"{formatted_name} : {player['pos']} : {player['ts']}")
     print("------------------------------------------" + Style.RESET_ALL)
-    
-    hm_abbr = "Your team"
+
+def print_away_team():
     aw, aw_abbr = get_aw()
 
-    return hm, hm_abbr, aw, aw_abbr
+    print() 
+    print(Fore.RED + "This is the Liverpool team you are playing" )
+    for player in aw:
+        name = player['name']
+        formatted_name = f"{name:<20}"
+        print(f"{formatted_name} : {player['pos']} : {player['ts']}")
+    print("------------------------------------------" + Style.RESET_ALL)
+
+    return aw, aw_abbr
 
 
 # Perform player adjustments----------------------------------------------------------------
@@ -406,9 +420,14 @@ def main():
     print_mid(player_data)
     print_att(player_data)
 
+    hm, hm_abbr = select_team(player_data)
+
     # team selection
-    hm, hm_abbr,aw ,aw_abbr = select_team(player_data)
-    
+    press_any_key_to_continue()
+    clear_terminal()
+    print_team_selected(hm)
+    aw, aw_abbr = print_away_team()
+
     # move to player and team calc phase
     press_any_key_to_continue()
     clear_terminal()
