@@ -107,7 +107,7 @@ def print_instructions():
     print the instructions for the game
     """
     print()
-    print_centered(Fore.RED + '=' * 70 + ' v1.77' + Style.RESET_ALL)
+    print_centered(Fore.RED + '=' * 70 + ' v1.79' + Style.RESET_ALL)
     print_centered(Fore.GREEN + 'The football management game where you pick')
     print_centered('the team to take on the mighty Liverpool FC.')
     print()
