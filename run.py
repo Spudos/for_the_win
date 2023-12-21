@@ -53,7 +53,7 @@ def print_centered(text):
 
 def print_for_the_win():
     """
-    print the header and instructions for the game
+    print the header for the game
     """
     block_letters = {
         'A': ['  **  ', ' *  * ', ' *****', '*    *', '*    *'],
@@ -101,8 +101,13 @@ def print_for_the_win():
     for line in lines:
         print_centered(line)
 
+
+def print_instructions():
+    """
+    print the instructions for the game
+    """
     print()
-    print_centered(Fore.RED + '=' * 70 + ' v1.74' + Style.RESET_ALL)
+    print_centered(Fore.RED + '=' * 70 + ' v1.75' + Style.RESET_ALL)
     print_centered(Fore.GREEN + 'The football management game where you pick')
     print_centered('the team to take on the mighty Liverpool FC.')
     print()
@@ -120,6 +125,61 @@ def print_for_the_win():
     press_any_key_to_continue()
 
     clear_terminal()
+
+# Login and authenticate user -------------------------------------------------
+
+
+def login(username, password):
+    CREDS = Credentials.from_service_account_file('creds.json')
+    SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+    GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+    SHEET = GSPREAD_CLIENT.open('for_the_win')
+
+    users = SHEET.worksheet('users')
+
+    data = users.get_all_records(empty2zero=False)
+    for row in data:
+        if row['username'] == username and row['password'] == password:
+            return True
+    return False
+
+
+def get_login_from_user():
+    while True:
+        print()
+        print_centered(Fore.RED + '=' * 79 + Style.RESET_ALL)
+        has_login_details = input("Do you have login details? (y/n):\n")
+        has_login_details = has_login_details.lower()
+        if has_login_details == "y":
+            username = input("Enter your username:\n")
+            password = input("Enter your password:\n")
+            if username and password:
+                if login(username, password):
+                    print("Login successful!")
+                    break
+                else:
+                    print("Invalid username or password.")
+            else:
+                print("Please enter both a username and password.")
+        elif has_login_details == "n":
+            new_username = input("Enter a new username:\n")
+            new_password = input("Enter a new password:\n")
+            add_user(new_username, new_password)
+            print("Login details saved successfully!")
+        else:
+            print("Invalid input. Please enter 'y' or 'n'.")
+
+
+def add_user(username, password):
+    CREDS = Credentials.from_service_account_file('creds.json')
+    SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+    GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+    SHEET = GSPREAD_CLIENT.open('for_the_win')
+
+    users = SHEET.worksheet('users')
+
+    users.append_row([username, password])
+
 
 # Load Teams ------------------------------------------------------------------
 
@@ -672,6 +732,11 @@ def main():
     clear_terminal()
 
     print_for_the_win()
+    print_instructions()
+
+    clear_terminal()
+    print_for_the_win()
+    get_login_from_user()
 
     # get player data from gsheet and print them to screen
     player_data = get_players()
