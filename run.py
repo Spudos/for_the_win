@@ -51,7 +51,6 @@ def get_aw():
                 "perf": row.get('perf'),
                 "adj_perf": row.get('adj_perf')
             }
-            print(player)
             aw.append(player)
 
     aw_abbr = "awy"
@@ -133,14 +132,21 @@ def select_team(player_data):
         player_id = int(input(f"Player:{i} Select id of player: "))
         team = player_data[player_id - 1]
         hm.append(team)
-        print(Fore.GREEN + f"You selected {team['name']}, a {team['pos']} with total skill rating of {team['ts']}" + Style.RESET_ALL)
-    print(hm)
-
+        print(Fore.GREEN + f"{team['name']} : {team['pos']} : {team['ts']}" + Style.RESET_ALL)
+    
+    print() 
+    print(Fore.YELLOW + "This is the team you selected ------------" )
+    for player in hm:
+        name = player['name']
+        formatted_name = f"{name:<20}"
+        print(f"{formatted_name} : {player['pos']} : {player['ts']}")
+    print("------------------------------------------" + Style.RESET_ALL)
+    
     hm_abbr = "Your team"
-
     aw, aw_abbr = get_aw()
 
     return hm, hm_abbr, aw, aw_abbr
+
 
 # Perform player adjustments----------------------------------------------------------------
 
@@ -400,8 +406,13 @@ def main():
     print_mid(player_data)
     print_att(player_data)
 
+    # team selection
     hm, hm_abbr,aw ,aw_abbr = select_team(player_data)
     
+    # move to player and team calc phase
+    press_any_key_to_continue()
+    clear_terminal()
+
     # make player adj and calculate team values for the hm team
     hm_data_1, aw_data_1 = run_player_adj(hm, aw)
 
