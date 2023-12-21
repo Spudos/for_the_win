@@ -23,6 +23,13 @@ def press_any_key_to_continue():
 def press_any_key_for_outcome():
     input(Fore.BLUE + "Press any key to see the match result..." + Style.RESET_ALL)
 
+def print_centered(text):
+    terminal_width = 80  # Adjust this value based on your terminal width
+    centered_text = text.center(terminal_width)
+    print(centered_text)
+
+# Header and instructions print ------------------------------------------------
+
 def print_for_the_win():
     block_letters = {
         'A': ['  **  ', ' *  * ', ' *****', '*    *', '*    *'],
@@ -54,6 +61,12 @@ def print_for_the_win():
         ' ': ['      ', '      ', '      ', '      ', '      '],
     }
 
+    print()
+    print()
+    print()
+    print_centered(Fore.RED + '============================================================================' + Style.RESET_ALL)
+    print()
+
     lines = ['', '', '', '', '']
     text = 'for the win'
     for char in text.upper():
@@ -66,7 +79,31 @@ def print_for_the_win():
                 lines[i] += ' ' * 7  # Add 7 spaces for unknown characters
 
     for line in lines:
-        print(line)
+        print_centered(line)
+    
+    print()
+    print_centered(Fore.RED + '============================================================================' + Style.RESET_ALL)
+    print()
+    print_centered(Fore.GREEN + 'The football management game where you pick the team to take on the mighty')
+    print_centered('Liverpool FC.')
+    print()
+    print()
+    print_centered('In the team selection screen, you will be able to select 11 players from a')
+    print_centered('list of those that are available.  Simply input the id for each player when')
+    print_centered('and the match engine will calculate the outcome by using the comlex hidden')
+    print_centered('stats for each player.')
+    print()
+    print_centered('The only rules are that you cannot pick a player twice and you must pick')
+    print_centered('11 players.  The formation will be determined based on what players you pick.')
+    print()
+    print_centered('You will then be able to see the match stats and finally, the outcome of the')
+    print_centered('game.')
+    print()
+    print_centered('Good luck, I hope you enjoy "For the Win!' + Style.RESET_ALL)
+    print()
+    press_any_key_to_continue()
+
+    clear_terminal()
 
 # Load Teams ----------------------------------------------------------------
 
@@ -174,11 +211,24 @@ def select_team(player_data):
     print()   
     print(Fore.RED + "============= TEAM SELECTION =============" + Style.RESET_ALL)
     print("From the list of players above, select the")
-    print("id of a player to put him in the team     ")
+    print("ID of a player to put him in the team.")
     print(Fore.RED + "------------------------------------------" + Style.RESET_ALL)
     hm = []
+    selected_ids = set()  # To keep track of selected player IDs
     for i in range(1, 12):
-        player_id = int(input(f"Player:{i} Select id of player: "))
+        while True:
+            try:
+                player_id = int(input(f"Player {i}: Select the ID of a player: "))
+                if player_id < 1 or player_id > len(player_data):
+                    print("Invalid player ID. Please enter a valid ID.")
+                elif player_id in selected_ids:
+                    print("Player already selected. Please choose a different player.")
+                else:
+                    selected_ids.add(player_id)
+                    break
+            except ValueError:
+                print("Invalid input. Please enter a valid ID.")
+        
         team = player_data[player_id - 1]
         hm.append(team)
         print(Fore.GREEN + f"{team['name']} : {team['pos']} : {team['ts']}" + Style.RESET_ALL)
@@ -186,6 +236,7 @@ def select_team(player_data):
     hm_abbr = "Your team"
 
     return hm, hm_abbr
+
 
 def print_team_selected(hm):
     print() 
@@ -437,6 +488,7 @@ def main():
     clear_terminal()
 
     print_for_the_win()
+
 
     # get player data from gsheet and print them to screen
     player_data = get_players()
