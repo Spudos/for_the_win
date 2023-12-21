@@ -1,12 +1,24 @@
-import gspread, random
+import gspread, random, os
 from google.oauth2.service_account import Credentials
 from datetime import datetime
+from colorama import Fore, Back, Style
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
     "https://www.googleapis.com/auth/drive"
 ]
+
+# General functions ----------------------------------------------------------
+
+def clear_terminal():
+    if os.name == 'posix':  # For Unix/Linux/Mac systems
+        os.system('clear')
+    elif os.name == 'nt':  # For Windows systems
+        os.system('cls')
+
+def press_any_key_to_continue():
+    input("Press any key to continue...")
 
 # Load Teams ----------------------------------------------------------------
 
@@ -82,43 +94,49 @@ def get_players():
 
 def print_gk(player):
     print()
-    print("Goalkeepers------------------------------")
+    print(Fore.RED + "=========== AVAILABLE PLAYERS ===========" + Style.RESET_ALL)
+    print(Fore.RED + "Goalkeepers------------------------------" + Style.RESET_ALL)
     for player in player:
         if player['pos'] == "GK":
             print(f"Id: {player['id']}, {player['name']}, {player['ts']} skill")
    
 def print_def(player): 
     print()  
-    print("Defenders--------------------------------")
+    print(Fore.RED + "Defenders--------------------------------" + Style.RESET_ALL)
     for player in player:
         if player['pos'] == "DEF":
             print(f"Id: {player['id']}, {player['name']}, {player['ts']} skill")
     
 def print_mid(player):    
     print()
-    print("Midfielders-------------------------------")
+    print(Fore.RED + "Midfielders-------------------------------" + Style.RESET_ALL)
     for player in player:    
         if player['pos'] == "MID":
             print(f"Id: {player['id']}, {player['name']}, {player['ts']} skill")
     
 def print_att(player): 
     print()   
-    print("Attackers---------------------------------")
+    print(Fore.RED + "Attackers---------------------------------" + Style.RESET_ALL)
     for player in player:    
         if player['pos'] == "ATT":
             print(f"Id: {player['id']}, {player['name']}, {player['ts']} skill")
-    print("------------------------------------------")
+    print(Fore.RED + "==========================================" + Style.RESET_ALL)
   
 def select_team(player_data):
+    print()   
+    print(Fore.RED + "============= TEAM SELECTION =============" + Style.RESET_ALL)
+    print("From the list of players above, select the")
+    print("id of a player to put him in the team     ")
+    print(Fore.RED + "------------------------------------------" + Style.RESET_ALL)
     hm = []
     for i in range(1, 12):
-        player_id = int(input(f"{i} Select id of player: "))
+        player_id = int(input(f"Player:{i} Select id of player: "))
         team = player_data[player_id - 1]
         hm.append(team)
-        
+        print(Fore.GREEN + f"You selected {team['name']}, a {team['pos']} with total skill rating of {team['ts']}" + Style.RESET_ALL)
     print(hm)
 
-    hm_abbr = "usr"
+    hm_abbr = "Your team"
 
     aw, aw_abbr = get_aw()
 
@@ -370,12 +388,13 @@ def text_file_match_output(hm_abbr, aw_abbr, hm_data_1, aw_data_1, hm_def_cnt, h
         file.write(f" \n")
         file.write(f"motm - hm: {hm_motm['name']} perf {hm_motm['adj_perf']} - aw: {aw_motm['name']} perf {aw_motm['adj_perf']}\n")
 
-# Run all functions----------------------------------------------------------------
+# Run all functions================================================================
 
 def main():
-    # get player data from gsheet
+    clear_terminal()
+
+    # get player data from gsheet and print them to screen
     player_data = get_players()
-    
     print_gk(player_data)
     print_def(player_data)
     print_mid(player_data)
