@@ -194,9 +194,7 @@ def print_att(player):
   
 def select_team(player_data): 
     print(Fore.RED + "============= TEAM SELECTION =============" + Style.RESET_ALL)
-    print("From the list of players above, select the")
-    print("ID of a player to put him in the team.")
-    print(Fore.RED + "------------------------------------------" + Style.RESET_ALL)
+    
     hm = []
     selected_ids = set()
     for i in range(1, 12):
@@ -215,8 +213,15 @@ def select_team(player_data):
         
         team = player_data[player_id - 1]
         hm.append(team)
-        print(Fore.GREEN + f"{team['name']} : {team['pos']} : {team['ts']}" + Style.RESET_ALL)
-    
+
+        clear_terminal()
+        
+        print_gk(player_data)
+        print_def(player_data)
+        print_mid(player_data)
+        print_att(player_data)
+        print(Fore.RED + "============= TEAM SELECTION =============" + Style.RESET_ALL)
+
     hm_abbr = "Your team"
 
     return hm, hm_abbr
@@ -277,7 +282,7 @@ def calc_on_player_random_perf(data):
 def run_player_adj(hm,aw):
     hm_data = calc_on_player_fitness(hm)
     hm_data_1 = calc_on_player_random_perf(hm_data)
-
+    
     aw_data = calc_on_player_fitness(aw)
     aw_data_1 = calc_on_player_random_perf(aw_data)
 
@@ -286,7 +291,7 @@ def run_player_adj(hm,aw):
 # Calculate team totals----------------------------------------------------------------
 
 def calculate_team(data, name):
-    
+    print(Fore.BLUE + "============== MATCH PLAYED =============="  + Style.RESET_ALL)
     print()
     print(Fore.RED + f"{name}"  + Style.RESET_ALL)
     print(Fore.RED + "Performance ratings ----------------------"  + Style.RESET_ALL)
@@ -318,6 +323,10 @@ def calculate_team(data, name):
     print("Team values calculated")
     print("Defence: ", def_count, " Midfield: ", mid_count, " Attack: ", att_count)
     print(Fore.RED + "==========================================" + Style.RESET_ALL)
+    
+    press_any_key_to_continue()
+    clear_terminal()
+
     return def_count, mid_count, att_count
 
 # Run the match----------------------------------------------------------------
@@ -479,15 +488,15 @@ def main():
     hm, hm_abbr = select_team(player_data)
 
     # team selection
-    press_any_key_to_continue()
     clear_terminal()
     print_team_selected(hm)
+    press_any_key_to_continue()
+    clear_terminal()
     aw, aw_abbr = print_away_team()
 
     # move to player and team calc phase
     press_any_key_to_continue()
     clear_terminal()
-    print(Fore.BLUE + "============== MATCH PLAYED =============="  + Style.RESET_ALL)
 
     # make player adj and calculate team values for the hm team
     hm_data_1, aw_data_1 = run_player_adj(hm, aw)
@@ -497,7 +506,6 @@ def main():
     aw_def_cnt, aw_mid_cnt, aw_att_cnt = calculate_team(aw_data_1, aw_abbr)
 
     # run the match
-    press_any_key_to_continue()
     run_match(hm_mid_cnt, aw_mid_cnt, hm_att_cnt, hm_def_cnt, aw_att_cnt, aw_def_cnt, hm_data_1, aw_data_1)
 
 main()
