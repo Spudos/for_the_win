@@ -97,6 +97,8 @@ User Stories covered -
 
 ### 5.1 PEP8 Validation
 
+The Code Institute python linter was use to validate the project code 
+
 ![PEP8 Linter](/images/pep8_linter.png)
 
 ### 5.2 Test User Stories
