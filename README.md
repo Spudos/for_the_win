@@ -254,12 +254,12 @@ You can clone the repository by following these steps:
   OS - For terminal functions like clear
 
   Google.oauth2.service_account - To use google sheets via api
-  
+
   Colorama - Text styling
 
 ## 9.0 Credits
 
-  No particular guide was used to help create this game btu stack overflow aand other random google serch results were used to help me understand the syntax of some elements where they were not covered in the course
+  No particular guide was used to help create this game but stack overflow and other random google serch results were used to help me understand the syntax of some elements where they were not covered in the course
 
   I also use the book, Python Programming for Beginners by Mark Reed as a handy reference
 
