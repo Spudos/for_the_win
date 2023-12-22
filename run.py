@@ -108,7 +108,7 @@ def print_instructions():
     print the instructions for the game
     """
     print()
-    print_centered(Fore.RED + '=' * 70 + ' v1.82' + Style.RESET_ALL)
+    print_centered(Fore.RED + '=' * 70 + ' v1.84' + Style.RESET_ALL)
     print_centered(Fore.GREEN + 'The football management game where you pick')
     print_centered('the team to take on the mighty Liverpool FC.')
     print()
@@ -725,15 +725,16 @@ def goals(hm_gls, aw_gls, hm_data_1, aw_data_1):
 
 def run_match(hm_mid_cnt, aw_mid_cnt, hm_att_cnt, hm_def_cnt,
               aw_att_cnt, aw_def_cnt, hm_data_1, aw_data_1):
-    hm_cha, aw_cha = calc_cha(hm_mid_cnt, aw_mid_cnt)
     """
     summary function to run all of the match calc
     functions.  this mehtod makes it easier to
     see the distinct modules in the code without
     importing other files
     """
+    # calculate number of chances created
+    hm_cha, aw_cha = calc_cha(hm_mid_cnt, aw_mid_cnt)
 
-    # claculate how many cha are on tar
+    # calculate how many cha are on tar
     hm_on_tar, aw_on_tar = calc_on_tar(hm_cha, aw_cha, hm_att_cnt,
                                        hm_def_cnt, aw_att_cnt, aw_def_cnt)
 

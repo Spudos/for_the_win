@@ -10,7 +10,7 @@
 - [2.0 User Stories](#20-user-stories)
   - [2.1 As a User](#21-as-a-user)
   - [2.2 As the Site Owner](#22-as-the-site-owner)
-- [3.0 Project Goals and logic](#30-project-goals-and-logic)
+- [3.0 Project logic](#30-project-logic)
 - [4.0 Features](#40-features)
   - [4.1 Welcome Screen](#41-welcome-screen)
   - [4.2 User Login](#42-user-login)
@@ -52,7 +52,16 @@
 
 9. 
 
-## 3.0 Project Goals and Logic
+## 3.0 Project Logic
+
+User login Logic
+![User Login](/images/flow_login.png)
+
+Team Selection Logic
+![Team Selection](/images/flow_selection.png)
+
+Match Engine Logic
+![Match Engine](/images/flow_match_engine.png)
 
 ## 4.0 Features
 
