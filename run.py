@@ -48,6 +48,7 @@ def print_centered(text):
     centered_text = text.center(terminal_width)
     print(centered_text)
 
+
 # Header and instructions print -----------------------------------------------
 
 
@@ -126,6 +127,7 @@ def print_instructions():
 
     clear_terminal()
 
+
 # Login and authenticate user -------------------------------------------------
 
 
@@ -135,18 +137,22 @@ def login(username, password):
     google sheet and returns true or false depending
     on what the user has entered
     """
-    CREDS = Credentials.from_service_account_file('creds.json')
-    SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-    GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-    SHEET = GSPREAD_CLIENT.open('for_the_win')
+    try:
+        CREDS = Credentials.from_service_account_file('creds.json')
+        SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+        GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+        SHEET = GSPREAD_CLIENT.open('for_the_win')
 
-    users = SHEET.worksheet('users')
+        users = SHEET.worksheet('users')
 
-    data = users.get_all_records(empty2zero=False)
-    for row in data:
-        if row['username'] == username and row['password'] == password:
-            return True
-    return False
+        data = users.get_all_records(empty2zero=False)
+        for row in data:
+            if row['username'] == username and row['password'] == password:
+                return True
+        return False
+    except Exception as e:
+        print(f"An error occurred during login: {str(e)}")
+        return False
 
 
 def get_login_from_user():
@@ -164,18 +170,24 @@ def get_login_from_user():
             username = input("Enter your username:\n")
             password = input("Enter your password:\n")
             if username and password:
-                if login(username, password):
-                    print("Login successful!")
-                    break
-                else:
-                    print("Invalid username or password.")
+                try:
+                    if login(username, password):
+                        print("Login successful!")
+                        break
+                    else:
+                        print("Invalid username or password.")
+                except Exception as e:
+                    print(f"An error occurred during login: {str(e)}")
             else:
                 print("Please enter both a username and password.")
         elif has_login_details == "n":
             new_username = input("Enter a new username:\n")
             new_password = input("Enter a new password (letters only):\n")
-            add_user(new_username, new_password)
-            print("Login details saved successfully!")
+            try:
+                add_user(new_username, new_password)
+                print("Login details saved successfully!")
+            except Exception as e:
+                print(f"An error occurred while saving details: {str(e)}")
         else:
             print("Invalid input. Please enter 'y' or 'n'.")
 
@@ -184,14 +196,18 @@ def add_user(username, password):
     """
     saves the new user details in the sheet
     """
-    CREDS = Credentials.from_service_account_file('creds.json')
-    SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-    GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-    SHEET = GSPREAD_CLIENT.open('for_the_win')
 
-    users = SHEET.worksheet('users')
+    try:
+        CREDS = Credentials.from_service_account_file('creds.json')
+        SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+        GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+        SHEET = GSPREAD_CLIENT.open('for_the_win')
 
-    users.append_row([username, password])
+        users = SHEET.worksheet('users')
+
+        users.append_row([username, password])
+    except Exception as e:
+        print(f"An error occurred while adding a new user: {str(e)}")
 
 
 # Load Teams ------------------------------------------------------------------
