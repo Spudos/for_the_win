@@ -232,19 +232,29 @@ You can clone the repository by following these steps:
 ### Technolgies Used
 
   Python - To code the project
-  Google Cloud and Sheets - Stire data for the game
+
+  Google Cloud and Sheets - Store data for the game
+
   PEP8 - Used to verify the code was free from errors in Python conventions
+
   Drawio.net - Flowchart design
+
   Git and Github - Version contol
+
   Visual Stuido - Code editor
+
   Heroku - Live deployment of the project
 
 ### Libraries used
 
   Gspread - To use google sheets via api
+
   Random - To generate randome numbers
+
   OS - For terminal functions like clear
+
   Google.oauth2.service_account - To use google sheets via api
+  
   Colorama - Text styling
 
 ## 9.0 Credits
