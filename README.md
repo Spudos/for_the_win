@@ -19,6 +19,7 @@
 - [5.0 Testing](#50-testing)
   - [5.1 PEP8 Validation](#51-pep8-validation)
   - [5.2 Test User Stories](#52-test-user-stories)
+  - [5.3 Unit Tests](#53-unit-tests)
 - [6.0 Unresolved Bugs](#60-unresolved-bugs)
 - [7.0 Deployment](#70-deployment)
 - [8.0 Credits](#80-credits)
@@ -183,7 +184,7 @@ The Code Institute python linter was use to validate the project code
 |-------------|------------|---------------------|
 | Google sheet and game functions | Variables are included in the code that directly affect the outcome of games and also controls random elements.  Player stats are more details than shown which also facilitates more features in future versions of the game | all criteria satisfied |
 
-### 5.3 Unit test
+### 5.3 Unit Tests
 
 Due to time constraints not all functions have been selected for unit test
 
