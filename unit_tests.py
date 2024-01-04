@@ -1,5 +1,5 @@
 import unittest
-from run import calc_on_player_fitness, calc_on_player_random_perf, generate_top_5
+from run import calc_on_player_fitness, calc_on_player_random_perf, generate_top_5, generate_goal_info
 class TestCalcOnPlayerFitness(unittest.TestCase):
     def test_calc_on_player_fitness_gk(self):
         data = [
@@ -184,6 +184,22 @@ class TestGenerateTop5(unittest.TestCase):
                 ]
 
         actual_output = generate_top_5(team_list, mid_adj, att_adj)
+
+        self.assertEqual(actual_output, expected_output)
+
+class TestGenerateGoalInfo(unittest.TestCase):
+    def test_generate_goal_info(self):
+        player_assist = {'name': 'Player 1'}
+        player_score = {'name': 'Player 2'}
+        team_name = 'Team A'
+
+        expected_output = {
+            "team": "Team A",
+            "scored_by": "Player 2",
+            "assisted_by": "Player 1"
+        }
+
+        actual_output = generate_goal_info(player_assist, player_score, team_name)
 
         self.assertEqual(actual_output, expected_output)
 

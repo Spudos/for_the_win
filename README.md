@@ -183,6 +183,23 @@ The Code Institute python linter was use to validate the project code
 |-------------|------------|---------------------|
 | Google sheet and game functions | Variables are included in the code that directly affect the outcome of games and also controls random elements.  Player stats are more details than shown which also facilitates more features in future versions of the game | all criteria satisfied |
 
+### 5.3 Unit test
+
+Due to time constraints not all functions have been selected for unit test
+
+The following functions were selected for testing covering a broad range of functions that are commonly repeated within the app
+
+calc_on_player_fitness
+calc_on_player_random_perf
+generate_top_5
+generate_goal_info
+
+7 tests were generated to cover these functions with all passing
+
+![test_results](/images/test_results.png)
+
+Tests can be performed by running 'python3.unit_test.py' from the command line
+
 ## 6.0 Unresolved Bugs
 
 All bugs were resolved as they were discovered
@@ -268,6 +285,10 @@ You can clone the repository by following these steps:
   Colorama - Text styling and colouring as this is not included in standard python
 
   Re - used for validation of the user password and username
+
+### Test Libraries Used
+
+  unittest - was used to facilitate selected function testing
 
 ## 9.0 Credits
 
