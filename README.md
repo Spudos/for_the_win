@@ -201,12 +201,22 @@ Pre deployment steps
 The website was then deployed using GitHub to Heroku by following these steps:
 
 1. From the Heroku dashboard select 'New' then 'Create new app'
+![heroku_1](/images/heroku_1.png)
+
 2. Give your app a name and select a region the click 'Create app'
+![heroku_2](/images/heroku_2.png)
+
 3. In 'Deployment method' select GitHub
 4. In 'Connect to GitHub' press search and select the name of your project in Github
+![heroku_4](/images/heroku_4.png)
+
 5. Click 'Enable Automatic Deploys' so the game will update with each push to GitHub
+![heroku_5](/images/heroku_5.png)
+
 6. Scroll back to the top of the screen and select 'Settings'
 7. Click 'Reveal Config Vars'
+![heroku_7](/images/heroku_7.png)
+
 8. In the 'Key' field enter 'port' and for 'value' enter '8000' and click 'Add'
 9. Click 'Add' again and enter a value of 'creds'
 10. Copy the entire contents of you creds.json from your local project and paste them into the 'value' field and click 'Add'
