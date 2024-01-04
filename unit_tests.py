@@ -1,7 +1,5 @@
 import unittest
-from unittest.mock import MagicMock
-from run import run_player_adj, calc_on_player_fitness, calc_on_player_random_perf
-
+from run import calc_on_player_fitness, calc_on_player_random_perf, generate_top_5
 class TestCalcOnPlayerFitness(unittest.TestCase):
     def test_calc_on_player_fitness_gk(self):
         data = [
@@ -162,40 +160,32 @@ class TestCalcOnPlayerRandomPerf(unittest.TestCase):
             self.assertGreaterEqual(i['adj_perf'], i['perf'] - 20)
             self.assertLessEqual(i['adj_perf'], i['perf'] + 20)
 
-class TestRunPlayerAdj(unittest.TestCase):
-    def test_run_player_adj(self):
-        # Mock the calc_on_player_fitness and calc_on_player_random_perf functions
-        calc_on_player_fitness_mock = MagicMock(return_value=[{'pos': 'GK', 'perf': 80}])
-        calc_on_player_random_perf_mock = MagicMock(return_value=[{'pos': 'GK', 'adj_perf': 85}])
-        
-        # Replace the original functions with the mock functions
-        original_calc_on_player_fitness = run.calc_on_player_fitness
-        original_calc_on_player_random_perf = run.calc_on_player_random_perf
-        run.calc_on_player_fitness = calc_on_player_fitness_mock
-        run.calc_on_player_random_perf = calc_on_player_random_perf_mock
-        
-        # Define the input data
-        hm = [{'pos': 'GK', 'fit': 90}]
-        aw = [{'pos': 'GK', 'fit': 80}]
-        
-        # Define the expected output
-        expected_hm_data_1 = [{'pos': 'GK', 'perf': 80}]
-        expected_aw_data_1 = [{'pos': 'GK', 'adj_perf': 85}]
-        
-        # Call the function being tested
-        result_hm_data_1, result_aw_data_1 = run_player_adj(hm, aw)
-        
-        # Assert that the mock functions were called with the correct arguments
-        calc_on_player_fitness_mock.assert_called_once_with(hm)
-        calc_on_player_random_perf_mock.assert_called_once_with(expected_hm_data_1)
-        
-        # Assert the output is as expected
-        self.assertEqual(result_hm_data_1, expected_hm_data_1)
-        self.assertEqual(result_aw_data_1, expected_aw_data_1)
-        
-        # Restore the original functions
-        run.calc_on_player_fitness = original_calc_on_player_fitness
-        run.calc_on_player_random_perf = original_calc_on_player_random_perf
+class TestGenerateTop5(unittest.TestCase):
+    def test_generate_top_5(self):
+        team_list = [
+            {'name': 'Player 1', 'pos': 'GK', 'perf': 80},
+            {'name': 'Player 2', 'pos': 'DEF', 'perf': 85},
+            {'name': 'Player 3', 'pos': 'MID', 'perf': 90},
+            {'name': 'Player 4', 'pos': 'MID', 'perf': 95},
+            {'name': 'Player 5', 'pos': 'ATT', 'perf': 85},
+            {'name': 'Player 6', 'pos': 'ATT', 'perf': 90},
+            {'name': 'Player 7', 'pos': 'DEF', 'perf': 80},
+        ]
+        mid_adj = 5
+        att_adj = 10
+
+        expected_output = [
+            {'name': 'Player 4', 'pos': 'MID', 'perf': 95, 'top_5': 100},
+            {'name': 'Player 6', 'pos': 'ATT', 'perf': 90, 'top_5': 100},
+            {'name': 'Player 3', 'pos': 'MID', 'perf': 90, 'top_5': 95},
+            {'name': 'Player 5', 'pos': 'ATT', 'perf': 85, 'top_5': 95},
+            {'name': 'Player 2', 'pos': 'DEF', 'perf': 85, 'top_5': 85},
+            {'name': 'Player 7', 'pos': 'DEF', 'perf': 80, 'top_5': 80},
+                ]
+
+        actual_output = generate_top_5(team_list, mid_adj, att_adj)
+
+        self.assertEqual(actual_output, expected_output)
 
 if __name__ == '__main__':
     unittest.main()
