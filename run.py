@@ -2,7 +2,8 @@ import gspread
 import random
 import os
 from google.oauth2.service_account import Credentials
-from colorama import Fore, Back, Style
+from colorama import Fore, Style
+import re
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -155,11 +156,13 @@ def login(username, password):
         return False
 
 
+import re
+
 def get_login_from_user():
     """
     asks if you have login details and if not allows
     you to save some.  validates response and ensures
-    both are enetered on login
+    both are entered on login
     """
     while True:
         print()
@@ -170,26 +173,33 @@ def get_login_from_user():
             username = input("Enter your username:\n")
             password = input("Enter your password:\n")
             if username and password:
-                try:
-                    if login(username, password):
-                        print("Login successful!")
-                        break
-                    else:
-                        print("Invalid username or password.")
-                except Exception as e:
-                    print(f"An error occurred during login: {str(e)}")
+                if re.match("^[a-zA-Z]+$", username) and re.match("^[a-zA-Z]+$", password):
+                    try:
+                        if login(username, password):
+                            print("Login successful!")
+                            break
+                        else:
+                            print("Invalid username or password.")
+                    except Exception as e:
+                        print(f"An error occurred during login: {str(e)}")
+                else:
+                    print("Username and password can only contain letters and no spaces.")
             else:
                 print("Please enter both a username and password.")
         elif has_login_details == "n":
             new_username = input("Enter a new username:\n")
             new_password = input("Enter a new password (letters only):\n")
-            try:
-                add_user(new_username, new_password)
-                print("Login details saved successfully!")
-            except Exception as e:
-                print(f"An error occurred while saving details: {str(e)}")
+            if re.match("^[a-zA-Z]+$", new_username) and re.match("^[a-zA-Z]+$", new_password):
+                try:
+                    add_user(new_username, new_password)
+                    print("Login details saved successfully!")
+                except Exception as e:
+                    print(f"An error occurred while saving details: {str(e)}")
+            else:
+                print("Username and password can only contain letters and no spaces.")
         else:
             print("Invalid input. Please enter 'y' or 'n'.")
+
 
 
 def add_user(username, password):
