@@ -155,9 +155,6 @@ def login(username, password):
         print(f"An error occurred during login: {str(e)}")
         return False
 
-
-import re
-
 def get_login_from_user():
     """
     asks if you have login details and if not allows
@@ -442,22 +439,22 @@ def calc_on_player_fitness(data):
             perf = int(((record['pa'] + record['co'] + record['sh']) +
                         (record['he'] + record['st'] + record['tk']) +
                         (record['ru'] + record['fl']) +
-                        (record['cr']) / 2) * fit / 100)
+                        (record['cr'])) / 2 * fit / 100)
         elif pos == "DEF":
             perf = int(((record['co'] + record['tk'] + record['ru']) +
                         (record['he'] + record['st'] + record['pa']) +
                         (record['sh'] + record['fl']) +
-                        (record['cr']) / 2) * fit / 100)
+                        (record['cr'])) / 2 * fit / 100)
         elif pos == "MID":
             perf = int(((record['pa'] + record['co'] + record['ru']) +
                         (record['fl'] + record['cr']) + (record['tk']) +
                         (record['sh'] + record['he']) +
-                        (record['st']) / 2) * fit / 100)
+                        (record['st'])) / 2 * fit / 100)
         else:
             perf = int(((record['co'] + record['ru'] + record['sh']) +
                         (record['fl'] + record['st']) + (record['pa']) +
                         (record['tk'] + record['he']) +
-                        (record['cr']) / 2) * fit / 100)
+                        (record['cr'])) / 2 * fit / 100)
 
         record['perf'] = perf
 
@@ -809,5 +806,5 @@ def main():
     run_match(hm_mid_cnt, aw_mid_cnt, hm_att_cnt, hm_def_cnt,
               aw_att_cnt, aw_def_cnt, hm_data_1, aw_data_1)
 
-
-main()
+if __name__ == '__main__':
+    main()
