@@ -71,6 +71,8 @@ good old days of football gaming.
 
 8. Have multiple 'behind the scenes' stats and some random elements that maintain the unpredictability of the results
 
+9. Have validated user log in details
+
 ## 3.0 Project Logic
 
 The data flow and logic for the app is shown in the images below
@@ -98,9 +100,11 @@ User Stories covered - 1, 2, 5
 
 The user is asked if they have existing details to log in and if not, details can be created.  If the user has details they can log in and play the game
 
+Validation is performed on the user details to ensure that only valid characters are used
+
 ![user Login](/images/user_login.png)
 
-User Stories covered - 5
+User Stories covered - 5, 9
 
 ### 4.3 Team Selection
 
@@ -191,8 +195,11 @@ Due to time constraints not all functions have been selected for unit test
 The following functions were selected for testing covering a broad range of functions that are commonly repeated within the app
 
 calc_on_player_fitness
+
 calc_on_player_random_perf
+
 generate_top_5
+
 generate_goal_info
 
 7 tests were generated to cover these functions with all passing
